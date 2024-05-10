@@ -2,7 +2,7 @@ extends CanvasLayer
 
 var show_cli := false
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("debug_console"):
 		toggle_cli()
 

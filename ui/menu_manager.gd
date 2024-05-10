@@ -14,5 +14,5 @@ func _input(event):
 	if event is InputEventKey:
 		if event.is_pressed() and event.physical_keycode == KEY_ESCAPE:
 			if current_menu.is_empty():
-				select_menu("PauseMenu")
+				select_menu("pause_menu")
 				time_manager.paused = true

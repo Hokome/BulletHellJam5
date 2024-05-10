@@ -1,5 +1,3 @@
-[gd_scene format=3 uid="uid://bdo7efopvylma"]
+[gd_scene format=3 uid="uid://pt5xfmbkw24k"]
 
-[node name="Game" type="Node2D"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="game" type="Node2D"]

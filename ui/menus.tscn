@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dy6kdgxhjl6m5" path="res://ui/pause_menu.tscn" id="1_efv2c"]
 [ext_resource type="Script" path="res://ui/menu_manager.gd" id="1_mkutk"]
 
-[node name="Menus" type="CanvasLayer"]
+[node name="menus" type="CanvasLayer"]
 script = ExtResource("1_mkutk")
 
-[node name="PauseMenu" parent="." instance=ExtResource("1_efv2c")]
+[node name="pause_menu" parent="." instance=ExtResource("1_efv2c")]
 visible = false
