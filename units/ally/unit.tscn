@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctn35r33n8khl"]
+[gd_scene load_steps=7 format=3 uid="uid://ctn35r33n8khl"]
 
 [ext_resource type="Script" path="res://units/ally/unit.gd" id="1_g4bk4"]
 [ext_resource type="Script" path="res://units/health.gd" id="1_r7txx"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="2_fd2gl"]
+[ext_resource type="SpriteFrames" uid="uid://wtoichkmblim" path="res://units/ally/unit_frames.tres" id="3_srkbs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j47w0"]
 size = Vector2(64, 128)
@@ -20,7 +21,11 @@ min_anchor_dist = 20.0
 script = ExtResource("1_r7txx")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(16, 32)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("3_srkbs")
+animation = &"run"
+autoplay = "idle"
+frame_progress = 0.313551
 
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_j47w0")
