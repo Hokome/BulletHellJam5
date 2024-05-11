@@ -1,6 +1,10 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://cjfujb72qqmkf"]
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://cjfujb72qqmkf"]
 
 [ext_resource type="Texture2D" uid="uid://dtuhcjag2ck76" path="res://units/ally/unit.png" id="1_bcnwj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v082p"]
+atlas = ExtResource("1_bcnwj")
+region = Rect2(512, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2is32"]
 atlas = ExtResource("1_bcnwj")
@@ -24,6 +28,14 @@ region = Rect2(0, 256, 256, 256)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v082p")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2is32")
