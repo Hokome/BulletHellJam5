@@ -13,6 +13,8 @@
 
 ## Sketch
 
-- [ ] Unit run animation
-- [ ] Fireball projectile
-- [ ] Basic enemy
+- [x] Unit run animation
+- [x] Fireball projectile
+- [x] Basic enemy
+- [ ] Slash effect
+- [ ] Enemy with weakpoint on the back
