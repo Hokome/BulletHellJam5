@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ctn35r33n8khl"]
 
-[ext_resource type="Script" path="res://units/unit.gd" id="1_g4bk4"]
+[ext_resource type="Script" path="res://units/ally/unit.gd" id="1_g4bk4"]
 [ext_resource type="Script" path="res://units/health.gd" id="1_r7txx"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="2_fd2gl"]
 

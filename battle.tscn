@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://battle.gd" id="1_j42mj"]
 [ext_resource type="PackedScene" uid="uid://bk07ru2b158kg" path="res://player.tscn" id="2_afout"]
-[ext_resource type="PackedScene" uid="uid://c3rnrx8rsva0w" path="res://units/squad.tscn" id="3_vaku5"]
+[ext_resource type="PackedScene" uid="uid://c3rnrx8rsva0w" path="res://units/ally/squad.tscn" id="3_vaku5"]
 [ext_resource type="PackedScene" uid="uid://bjlj67eo7ah71" path="res://units/enemy/enemy.tscn" id="4_1hlqi"]
 
 [node name="battle" type="Node2D"]
