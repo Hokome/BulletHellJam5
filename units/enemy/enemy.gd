@@ -12,8 +12,10 @@ func _process(delta):
 func shoot():
 	shooting = true
 	await pattern.shoot(self, get_parent())
+	
 	var timer := time_manager.create_timer(cooldown)
 	add_child(timer)
 	await timer.timeout
 	timer.queue_free()
+	
 	shooting = false

@@ -4,9 +4,11 @@
 
 - [x] Squad movement
 - [x] Enemy projectile patterns
-- [ ] Damage system
+- [x] Damage system
+- [x] Unit death
+- [ ] Phantom squad bug fix
+- [ ] Player attack
 - [ ] Enemy death
-- [ ] Unit death
 - [ ] Enemy movement
 
 ## Sketch

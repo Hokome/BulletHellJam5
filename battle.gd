@@ -1,5 +1,7 @@
 class_name Battle extends Node2D
 
+enum Faction {Neutral, Ally, Enemy}
+
 @export var player_scene: PackedScene
 @export var squad: PackedScene
 @export var enemy: PackedScene
