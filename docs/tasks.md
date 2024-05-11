@@ -17,4 +17,13 @@
 - [x] Fireball projectile
 - [x] Basic enemy
 - [ ] Slash effect
-- [ ] Enemy with weakpoint on the back
+- [ ] Bigger enemy with weakpoint on the back
+- [ ] Lightning bolt (512x32)
+- [ ] Magic circle
+- [ ] Battlefield decorations (weeds, flowers etc.)
+- [ ] Battlefield background (grass)
+
+### Big map
+
+- [ ] Grass tile (1024x1024)
+- [ ] Town tile
