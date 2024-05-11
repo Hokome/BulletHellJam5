@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bjlj67eo7ah71"]
 
-[ext_resource type="Texture2D" uid="uid://dp8bwsiiev8fw" path="res://circle.png" id="1_hcklj"]
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_trqow"]
 [ext_resource type="Script" path="res://units/enemy/projectile_pattern.gd" id="2_jegsq"]
 [ext_resource type="PackedScene" uid="uid://brpqbltmcyray" path="res://units/enemy/projectile.tscn" id="2_o24u8"]
+[ext_resource type="Texture2D" uid="uid://bhtswylyy7104" path="res://units/enemy/enemy.png" id="4_vc7ba"]
 
 [sub_resource type="Resource" id="Resource_pqhk1"]
 script = ExtResource("2_jegsq")
@@ -16,4 +16,5 @@ pattern = SubResource("Resource_pqhk1")
 cooldown = 5.0
 
 [node name="circle" type="Sprite2D" parent="."]
-texture = ExtResource("1_hcklj")
+scale = Vector2(0.570313, 0.570313)
+texture = ExtResource("4_vc7ba")
