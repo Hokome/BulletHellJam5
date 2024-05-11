@@ -1,39 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3rnrx8rsva0w"]
 
 [ext_resource type="Script" path="res://units/squad.gd" id="1_vpg5f"]
-[ext_resource type="PackedScene" uid="uid://ctn35r33n8khl" path="res://units/unit.tscn" id="2_4gybm"]
+[ext_resource type="PackedScene" uid="uid://ctn35r33n8khl" path="res://units/unit.tscn" id="2_yqp8n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6te3u"]
 radius = 128.0
 
-[node name="squad" type="CharacterBody2D"]
-input_pickable = true
-motion_mode = 1
-platform_on_leave = 2
+[node name="squad" type="Area2D"]
 script = ExtResource("1_vpg5f")
 speed = 300.0
-min_target_dist = 10.0
+test_unit = ExtResource("2_yqp8n")
 
-[node name="unit" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(0, -100)
-
-[node name="unit_2" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(-100, 0)
-
-[node name="unit_3" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(100, 0)
-
-[node name="unit_4" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(0, 100)
-
-[node name="collider" type="CollisionShape2D" parent="."]
+[node name="hover_zone" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6te3u")
-
-[node name="direction_line" type="Line2D" parent="."]
-z_index = -1
-points = PackedVector2Array(0, 0, 0, 0)
-width = 4.0
-default_color = Color(1, 1, 1, 0.392157)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

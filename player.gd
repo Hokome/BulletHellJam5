@@ -10,4 +10,4 @@ func _process(_delta):
 		selected_squad = hovered_squad
 	
 	if selected_squad != null and Input.is_action_just_pressed("squad_action"):
-		selected_squad.target_position = get_local_mouse_position()
+		selected_squad.position = get_local_mouse_position()

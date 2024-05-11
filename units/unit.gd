@@ -1,8 +1,15 @@
-class_name Unit extends Node2D
+class_name Unit extends CharacterBody2D
+
+@export var speed: float
+@export var min_anchor_dist: float
 
 var squad: Squad
+var anchor: Node2D
 
-func _ready():
-	squad = get_parent()
-	squad.unit_count += 1
-	$health.on_death.connect(func(): squad.on_unit_died(self))
+func _process(delta):
+	if not is_at_destination():
+		var diff = (anchor.global_position - global_position)
+		velocity = diff.normalized() * speed
+		move_and_slide()
+
+func is_at_destination() -> bool: return (anchor.global_position - global_position).length() <= min_anchor_dist

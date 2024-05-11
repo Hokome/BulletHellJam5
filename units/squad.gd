@@ -1,32 +1,33 @@
-class_name Squad extends CharacterBody2D
+class_name Squad extends Area2D
 
 @export var speed: float
-@export var min_target_dist: float
-
-@onready var direction_line = $direction_line
+@export var test_unit: PackedScene
 
 var hovered := false
 var selected := false
 
-var target_position: Vector2
-
 var unit_count: int = 0
 
-func _process(_delta):
-	if time_manager.paused: return
-	direction_line.visible = not is_at_destination()
-	direction_line.points[1] = target_position - position
+func create_units():
+	create_unit(Vector2(100, 0))
+	create_unit(Vector2(-100, 0))
 
-func _physics_process(delta):
-	if time_manager.paused: return
-	if not is_at_destination():
-		var diff = (target_position - position)
-		velocity = diff.normalized() * speed
-		move_and_slide()
+func create_unit(pos):
+	var anchor = Node2D.new()
+	add_child(anchor)
+	anchor.position = pos
+	anchor.name = "anchor"
+	
+	var unit = test_unit.instantiate()
+	get_parent().add_child(unit)
+	unit.global_position = anchor.global_position
+	
+	unit_count += 1
+	unit.squad = self
+	unit.anchor = anchor
+	unit.get_node("health").on_death.connect(on_unit_died)
 
-func is_at_destination() -> bool: return (target_position - position).length() <= min_target_dist
-
-func on_unit_died(unit):
+func on_unit_died():
 	unit_count -= 1
 	if unit_count <= 0:
 		queue_free()

@@ -21,6 +21,6 @@ func add_squad(pos):
 	var new_squad = squad.instantiate()
 	add_child(new_squad)
 	new_squad.position = pos
-	new_squad.target_position = pos
+	new_squad.create_units()
 
 func player() -> Player: return $player as Player
