@@ -10,6 +10,8 @@ var selected := false
 
 var target_position: Vector2
 
+var unit_count: int = 0
+
 func _process(_delta):
 	if time_manager.paused: return
 	direction_line.visible = not is_at_destination()
@@ -23,6 +25,11 @@ func _physics_process(delta):
 		move_and_slide()
 
 func is_at_destination() -> bool: return (target_position - position).length() <= min_target_dist
+
+func on_unit_died(unit):
+	unit_count -= 1
+	if unit_count <= 0:
+		queue_free()
 
 func _on_mouse_entered():
 	hovered = true

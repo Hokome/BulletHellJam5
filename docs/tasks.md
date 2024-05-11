@@ -6,7 +6,7 @@
 - [x] Enemy projectile patterns
 - [x] Damage system
 - [x] Unit death
-- [ ] Phantom squad bug fix
+- [x] Phantom squad bug fix
 - [ ] Player attack
 - [ ] Enemy death
 - [ ] Enemy movement

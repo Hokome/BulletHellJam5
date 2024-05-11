@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctn35r33n8khl"]
+[gd_scene load_steps=6 format=3 uid="uid://ctn35r33n8khl"]
 
+[ext_resource type="Script" path="res://units/unit.gd" id="1_g4bk4"]
 [ext_resource type="Texture2D" uid="uid://b41xlisui4xdv" path="res://square.png" id="1_q3ruf"]
 [ext_resource type="Script" path="res://units/health.gd" id="1_r7txx"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="2_fd2gl"]
@@ -8,6 +9,7 @@
 size = Vector2(64, 128)
 
 [node name="unit" type="Node2D"]
+script = ExtResource("1_g4bk4")
 
 [node name="health" type="Node2D" parent="."]
 script = ExtResource("1_r7txx")
