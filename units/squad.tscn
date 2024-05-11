@@ -4,27 +4,27 @@
 [ext_resource type="PackedScene" uid="uid://ctn35r33n8khl" path="res://units/unit.tscn" id="2_4gybm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6te3u"]
-radius = 40.0
+radius = 128.0
 
 [node name="squad" type="CharacterBody2D"]
 input_pickable = true
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_vpg5f")
-speed = 200.0
-min_target_dist = 5.0
+speed = 300.0
+min_target_dist = 10.0
 
 [node name="unit" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(0, -23)
+position = Vector2(0, -100)
 
 [node name="unit_2" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(-23, 0)
+position = Vector2(-100, 0)
 
 [node name="unit_3" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(23, 0)
+position = Vector2(100, 0)
 
 [node name="unit_4" parent="." instance=ExtResource("2_4gybm")]
-position = Vector2(0, 23)
+position = Vector2(0, 100)
 
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6te3u")

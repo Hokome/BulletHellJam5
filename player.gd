@@ -4,6 +4,8 @@ var hovered_squad: Squad
 var selected_squad: Squad
 
 func _process(_delta):
+	if time_manager.paused: return
+	
 	if Input.is_action_just_pressed("select_squad"):
 		selected_squad = hovered_squad
 	

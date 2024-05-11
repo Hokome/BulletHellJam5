@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctn35r33n8khl"]
 
-[ext_resource type="Texture2D" uid="uid://dp8bwsiiev8fw" path="res://circle.png" id="1_ewfjp"]
+[ext_resource type="Texture2D" uid="uid://b41xlisui4xdv" path="res://square.png" id="1_q3ruf"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mqdab"]
-radius = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfqdi"]
+size = Vector2(64, 128)
 
 [node name="unit" type="Node2D"]
 
 [node name="sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_ewfjp")
+scale = Vector2(16, 32)
+texture = ExtResource("1_q3ruf")
 
 [node name="hurtbox" type="Area2D" parent="."]
 
 [node name="shape" type="CollisionShape2D" parent="hurtbox"]
-shape = SubResource("CircleShape2D_mqdab")
+shape = SubResource("RectangleShape2D_mfqdi")

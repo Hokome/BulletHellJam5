@@ -3,7 +3,7 @@
 ## Hokome
 
 - [x] Squad movement
-- [ ] Enemy projectile patterns
+- [x] Enemy projectile patterns
 - [ ] Damage system
 - [ ] Enemy death
 - [ ] Unit death
