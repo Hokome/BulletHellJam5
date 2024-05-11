@@ -1,15 +1,14 @@
 class_name Unit extends CharacterBody2D
 
+signal anchor_changed
+
 @export var speed: float
-@export var min_anchor_dist: float
 
 var squad: Squad
 var anchor: Node2D
 
-func _process(delta):
-	if not is_at_destination():
-		var diff = (anchor.global_position - global_position)
-		velocity = diff.normalized() * speed
-		move_and_slide()
+func _ready():
+	anchor_changed.connect(func(): $state_machine.set_state("repositioning"))
 
-func is_at_destination() -> bool: return (anchor.global_position - global_position).length() <= min_anchor_dist
+func _physics_process(_delta):
+	move_and_slide()

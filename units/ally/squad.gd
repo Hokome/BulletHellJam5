@@ -1,5 +1,7 @@
 class_name Squad extends Area2D
 
+signal anchor_changed
+
 @export var speed: float
 @export var test_unit: PackedScene
 
@@ -25,9 +27,13 @@ func create_unit(pos):
 	unit_count += 1
 	unit.squad = self
 	unit.anchor = anchor
-	unit.get_node("health").on_death.connect(on_unit_died)
+	unit.get_node("health").on_death.connect(on_unit_died.bind(unit))
+	
+	anchor_changed.connect(unit.emit_signal.bind("anchor_changed"))
 
-func on_unit_died():
+func on_unit_died(unit):
+	anchor_changed.disconnect(unit.emit_signal)
+	
 	unit_count -= 1
 	if unit_count <= 0:
 		queue_free()

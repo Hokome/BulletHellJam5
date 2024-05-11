@@ -11,3 +11,4 @@ func _process(_delta):
 	
 	if selected_squad != null and Input.is_action_just_pressed("squad_action"):
 		selected_squad.position = get_local_mouse_position()
+		selected_squad.anchor_changed.emit()
