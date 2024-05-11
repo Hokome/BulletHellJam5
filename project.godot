@@ -28,6 +28,10 @@ window/size/viewport_width=3840
 window/size/viewport_height=2160
 window/stretch/mode="canvas_items"
 
+[dotnet]
+
+project/assembly_name="Bullet Hell Jam 5"
+
 [editor]
 
 naming/node_name_num_separator=2
