@@ -21,6 +21,7 @@ menus="*res://ui/menus.tscn"
 time_manager="*res://time_manager.gd"
 debugger="*res://debug/debugger.tscn"
 battle="*res://battle.tscn"
+map="*res://map/map.tscn"
 
 [display]
 

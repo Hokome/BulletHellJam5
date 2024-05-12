@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj6bg2xfnf5kl"]
+
+[ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_ckwds"]
+
+[node name="label" type="Label"]
+theme = ExtResource("1_ckwds")
+text = "John"

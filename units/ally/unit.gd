@@ -37,7 +37,6 @@ func _physics_process(delta):
 			
 			attack_timer.start()
 
-
 func can_attack() -> bool: return attack_timer.time_left <= 0
 func is_at_destination(delta) -> bool: return (target_position - global_position).length() <= speed * delta
 
