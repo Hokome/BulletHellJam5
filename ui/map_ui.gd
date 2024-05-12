@@ -6,6 +6,9 @@ class_name MapUI extends CanvasLayer
 
 func display_squads(squad_list: Array[Map.SquadInfo]):
 	var squads = $right/squads
+	for c in squads.get_children():
+		c.queue_free()
+	
 	for squad_info in squad_list:
 		var sq_ui := squad_ui.instantiate()
 		squads.add_child(sq_ui)

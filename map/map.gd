@@ -18,12 +18,13 @@ class SquadInfo:
 class UnitInfo:
 	var name: String
 
+@onready var map_ui = $map_ui
+
 var tiles := []
 var selected_tile: Tile:
 	set(val):
 		selected_tile = val
-		if !selected_tile.squads.is_empty():
-			$map_ui.display_squads(selected_tile.squads)
+		map_ui.display_squads(selected_tile.squads)
 
 func _ready():
 	generate_map()
