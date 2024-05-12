@@ -1,19 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjlj67eo7ah71"]
+[gd_scene load_steps=9 format=3 uid="uid://bjlj67eo7ah71"]
 
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_trqow"]
 [ext_resource type="PackedScene" uid="uid://brpqbltmcyray" path="res://attacks/projectile.tscn" id="2_r3ey5"]
 [ext_resource type="Script" path="res://attacks/projectile_pattern.gd" id="3_v8s31"]
 [ext_resource type="Texture2D" uid="uid://bhtswylyy7104" path="res://units/enemy/enemy.png" id="4_jaleb"]
+[ext_resource type="Script" path="res://units/health.gd" id="4_ssyq8"]
+[ext_resource type="Script" path="res://units/hurtbox.gd" id="5_csdaw"]
 
 [sub_resource type="Resource" id="Resource_pqhk1"]
 script = ExtResource("3_v8s31")
 projectile_scene = ExtResource("2_r3ey5")
 projectile_count = 8
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jqobl"]
+radius = 128.0
+
 [node name="enemy" type="Node2D"]
 script = ExtResource("1_trqow")
 pattern = SubResource("Resource_pqhk1")
 cooldown = 5.0
 
+[node name="health" type="Node2D" parent="."]
+script = ExtResource("4_ssyq8")
+max_value = 30
+
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_jaleb")
+
+[node name="hurtbox" type="Area2D" parent="."]
+script = ExtResource("5_csdaw")
+faction = 2
+
+[node name="shape" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_jqobl")
+debug_color = Color(0.844988, 0.00101402, 0.911744, 0.42)
+
+[connection signal="on_damage" from="hurtbox" to="health" method="damage"]

@@ -7,6 +7,7 @@
 - [x] Damage system
 - [x] Unit death
 - [x] Phantom squad bug fix
+- [x] Unit state machine
 - [ ] Player attack
 - [ ] Enemy death
 - [ ] Enemy movement
@@ -16,7 +17,7 @@
 - [x] Unit run animation
 - [x] Fireball projectile
 - [x] Basic enemy
-- [ ] Slash effect
+- [ ] Flag for squad anchor point
 - [ ] Bigger enemy with weakpoint on the back
 - [ ] Lightning bolt (512x32)
 - [ ] Magic circle

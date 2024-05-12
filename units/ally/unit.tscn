@@ -1,12 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctn35r33n8khl"]
+[gd_scene load_steps=7 format=3 uid="uid://ctn35r33n8khl"]
 
 [ext_resource type="Script" path="res://units/ally/unit.gd" id="1_nohcy"]
 [ext_resource type="Script" path="res://units/health.gd" id="2_ogbsk"]
 [ext_resource type="SpriteFrames" uid="uid://cjfujb72qqmkf" path="res://units/ally/unit_frames.tres" id="3_bkyh2"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="3_e0fdt"]
-[ext_resource type="Script" path="res://units/state_machine/state_machine.gd" id="5_3u03x"]
-[ext_resource type="Script" path="res://units/state_machine/idle_state.gd" id="6_od1yv"]
-[ext_resource type="Script" path="res://units/state_machine/repositioning_state.gd" id="7_rly2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j47w0"]
 size = Vector2(64, 128)
@@ -21,6 +18,7 @@ speed = 200.0
 
 [node name="health" type="Node2D" parent="."]
 script = ExtResource("2_ogbsk")
+max_value = 5
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -36,16 +34,5 @@ faction = 1
 
 [node name="shape" type="CollisionShape2D" parent="hurtbox"]
 shape = SubResource("RectangleShape2D_mfqdi")
-
-[node name="state_machine" type="Node" parent="."]
-script = ExtResource("5_3u03x")
-default_state = "idle"
-
-[node name="idle" type="Node" parent="state_machine"]
-script = ExtResource("6_od1yv")
-
-[node name="repositioning" type="Node" parent="state_machine"]
-script = ExtResource("7_rly2h")
-min_anchor_dist = 20.0
 
 [connection signal="on_damage" from="hurtbox" to="health" method="damage"]
