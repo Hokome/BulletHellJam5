@@ -1,5 +1,7 @@
 class_name Map extends Node2D
 
+@export var squad_texture: Texture
+
 const MAP_SIZE: int = 12
 const HALF_MAP: int = MAP_SIZE / 2
 
@@ -9,8 +11,10 @@ const HALF_TILE: int = TILE_SIZE / 2
 @onready var cursor: Node2D = $cursor
 
 class Tile:
+	var position: Vector2i
 	var type: int = -1
 	var squads: Array[SquadInfo] = []
+	var map_icon: Sprite2D
 
 class SquadInfo:
 	var units: Array[UnitInfo] = []
@@ -34,6 +38,12 @@ func _ready():
 func add_squads():
 	var tile: Tile = tiles[6][6]
 	tile.squads = [SquadInfo.new()]
+	
+	tile.map_icon = Sprite2D.new()
+	tile.map_icon.texture = squad_texture
+	add_child(tile.map_icon)
+	tile.map_icon.position = grid_to_world(tile.position)
+	
 	add_unit(tile.squads[0], "John")
 	add_unit(tile.squads[0], "Kevin")
 
@@ -49,11 +59,14 @@ func generate_map():
 		for y in MAP_SIZE:
 			var tile = Tile.new()
 			tile.type = 0
+			tile.position = Vector2i(x, y)
 			tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
 			tiles[x].append(tile)
 
 func _process(delta):
 	cursor.position = get_cursor_world()
+
+func grid_to_world(grid_pos: Vector2i) -> Vector2: return (grid_pos as Vector2) * TILE_SIZE - Vector2.ONE * HALF_TILE
 
 func get_cursor_world() -> Vector2:
 	var cursor_pos = get_local_mouse_position()
