@@ -10,7 +10,7 @@ func _ready():
 	add_child(player_scene.instantiate())
 	add_squad(Vector2(-400, 0))
 	add_squad(Vector2(400, 0))
-	add_enemy(Vector2(0, -200))
+	add_enemy(Vector2(0, -500))
 
 func add_enemy(pos):
 	var new_enemy = enemy.instantiate()

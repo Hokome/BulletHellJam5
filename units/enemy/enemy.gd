@@ -11,7 +11,7 @@ func _process(delta):
 
 func shoot():
 	shooting = true
-	await pattern.shoot(self, get_parent())
+	await pattern.shoot(self, battle)
 	
 	var timer := time_manager.create_timer(cooldown)
 	add_child(timer)

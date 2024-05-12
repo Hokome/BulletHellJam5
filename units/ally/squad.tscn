@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3rnrx8rsva0w"]
+[gd_scene load_steps=4 format=3 uid="uid://c3rnrx8rsva0w"]
 
 [ext_resource type="Script" path="res://units/ally/squad.gd" id="1_wn47c"]
 [ext_resource type="PackedScene" uid="uid://ctn35r33n8khl" path="res://units/ally/unit.tscn" id="2_xum4u"]
@@ -6,22 +6,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_6te3u"]
 radius = 128.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_unmgl"]
-radius = 512.0
-
 [node name="squad" type="Area2D"]
 script = ExtResource("1_wn47c")
 speed = 300.0
 test_unit = ExtResource("2_xum4u")
 
 [node name="hover_zone" type="CollisionShape2D" parent="."]
+z_index = -1
 shape = SubResource("CircleShape2D_6te3u")
-
-[node name="range_trigger" type="Area2D" parent="."]
-
-[node name="trigger_zone" type="CollisionShape2D" parent="range_trigger"]
-shape = SubResource("CircleShape2D_unmgl")
-debug_color = Color(0.25, 0.25, 0.25, 0.419608)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

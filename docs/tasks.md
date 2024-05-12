@@ -8,8 +8,8 @@
 - [x] Unit death
 - [x] Phantom squad bug fix
 - [x] Unit state machine
-- [ ] Player attack
-- [ ] Enemy death
+- [x] Player attack
+- [x] Enemy death
 - [ ] Enemy movement
 
 ## Sketch
