@@ -12,6 +12,13 @@
 - [x] Enemy death
 - [ ] Enemy movement
 
+### Big map
+
+- [ ] Grid
+- [ ] Squad selection
+- [ ] Squad movement
+- [ ] Confirm button
+
 ## Sketch
 
 - [x] Unit run animation
