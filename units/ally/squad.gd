@@ -9,7 +9,7 @@ signal target_in_range
 var hovered := false
 var selected := false
 
-var unit_count: int = 0
+var units: Array[Unit] = []
 
 const UNIT_POS: Array[Vector2] = [
 	Vector2(100, 0),
@@ -17,27 +17,33 @@ const UNIT_POS: Array[Vector2] = [
 ]
 
 func create_unit(unit_info: Map.UnitInfo):
-	var pos = UNIT_POS[unit_count]
+	var pos = UNIT_POS[units.size()]
 	var anchor = Node2D.new()
 	add_child(anchor)
 	anchor.position = pos
 	anchor.name = "anchor"
 	
-	var unit = test_unit.instantiate()
+	var unit: Unit = test_unit.instantiate()
 	get_parent().add_child(unit)
 	unit.global_position = anchor.global_position
+	unit.import_unit(unit_info)
 	
-	unit_count += 1
+	units.append(unit)
+	
 	unit.squad = self
 	unit.get_node("health").on_death.connect(on_unit_died.bind(unit))
 	
 	anchor_changed.connect(unit.reposition.bind(anchor))
 
+func update_units():
+	for u in units:
+		u.update_unit_info()
+
 func on_unit_died(unit):
-	anchor_changed.disconnect(unit.emit_signal)
+	anchor_changed.disconnect(unit.reposition)
+	units.erase(unit)
 	
-	unit_count -= 1
-	if unit_count <= 0:
+	if units.is_empty():
 		queue_free()
 
 func _on_mouse_entered():

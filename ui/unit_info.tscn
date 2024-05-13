@@ -1,7 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj6bg2xfnf5kl"]
+[gd_scene load_steps=4 format=3 uid="uid://dj6bg2xfnf5kl"]
 
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_ckwds"]
+[ext_resource type="Script" path="res://ui/unit_ui.gd" id="2_u1lxs"]
+[ext_resource type="Theme" uid="uid://cnvec1w8fbn2t" path="res://ui/health_theme.tres" id="3_hvtwc"]
 
-[node name="label" type="Label"]
+[node name="unit" type="VBoxContainer" node_paths=PackedStringArray("name_label", "hp_bar")]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_ckwds")
+script = ExtResource("2_u1lxs")
+name_label = NodePath("name")
+hp_bar = NodePath("health")
+
+[node name="name" type="Label" parent="."]
+layout_mode = 2
 text = "John"
+
+[node name="health" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("3_hvtwc")
+show_percentage = false

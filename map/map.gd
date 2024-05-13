@@ -21,13 +21,23 @@ class Tile:
 		resolved = false
 		for s in squads:
 			s.pos_locked = false
+			for u in s.units:
+				if u.marked_delete:
+					s.units.erase(u)
+		for s in squads:
+			if s.marked_delete:
+				squads.erase(s)
 
-class SquadInfo:
+class SquadInfo extends RefCounted:
 	var units: Array[UnitInfo] = []
 	var pos_locked := false
+	var marked_delete := false
 
-class UnitInfo:
+class UnitInfo extends RefCounted:
 	var name: String
+	var hp: int
+	var max_hp: int
+	var marked_delete := false
 
 @onready var map_ui = $map_ui
 
@@ -35,7 +45,10 @@ var tiles := []
 var selected_tile: Tile:
 	set(val):
 		selected_tile = val
-		map_ui.display_squads(selected_tile.squads)
+		if selected_tile != null:
+			map_ui.display_squads(selected_tile.squads)
+		else:
+			map_ui.display_squads([])
 
 func _ready():
 	generate_map()
@@ -57,6 +70,8 @@ func add_squads():
 func add_unit(squad: SquadInfo, unit_name: String):
 	var unit := UnitInfo.new()
 	unit.name = unit_name
+	unit.max_hp = 5
+	unit.hp = unit.max_hp
 	squad.units.append(unit)
 
 func generate_map():
@@ -130,3 +145,4 @@ func battle_end_callback():
 		for ty: Tile in tx:
 			ty.reset()
 	$map_camera.enabled = true
+	selected_tile = null

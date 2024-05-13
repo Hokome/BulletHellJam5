@@ -12,6 +12,7 @@ const STARTING_POS: Array[Vector2] = [
 @export var squad_scene: PackedScene
 @export var enemy: PackedScene
 
+var squads_info: Array[Map.SquadInfo]
 var squad_list: Array[Squad] = []
 var enemy_list: Array[Node2D] = []
 
@@ -21,12 +22,21 @@ func _ready():
 	player.enabled = false
 
 func start_battle(squads: Array[Map.SquadInfo]):
+	squads_info = squads
 	visible = true
 	add_enemy(Vector2(0, -200))
 	add_child(player_scene.instantiate())
 	for i in squads.size():
 		add_squad(squads[i], STARTING_POS[i])
 
+func add_squad(squad_info: Map.SquadInfo, pos: Vector2):
+	var squad: Squad = squad_scene.instantiate()
+	add_child(squad)
+	squad.position = pos
+	squad_list.append(squad)
+	for unit in squad_info.units:
+		squad.create_unit(unit)
+	
 func add_enemy(pos):
 	var new_enemy = enemy.instantiate()
 	add_child(new_enemy)
@@ -40,16 +50,16 @@ func remove_enemy(enemy):
 		end_battle()
 
 func end_battle():
+	for i in squad_list.size():
+		if squad_list[i] == null:
+			squads_info[i].marked_delete = true
+		else:
+			squad_list[i].update_units()
 	for c in get_children():
 		if c.name != "player":
 			c.queue_free()
 	player().enabled = false
 	map.battle_end_callback()
-func add_squad(squad_info: Map.SquadInfo, pos: Vector2):
-	var squad: Squad = squad_scene.instantiate()
-	add_child(squad)
-	squad.position = pos
-	for unit in squad_info.units:
-		squad.create_unit(unit)
+
 
 func player() -> Player: return $player as Player

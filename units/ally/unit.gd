@@ -12,6 +12,21 @@ var enemies_in_range: Array[Hurtbox] = []
 
 var attack_timer: BattleTimer
 
+var unit_info: Map.UnitInfo
+
+func update_unit_info():
+	unit_info.hp = $health.value
+	
+	unit_info.marked_delete = false
+
+func import_unit(info: Map.UnitInfo):
+	unit_info = info
+	
+	$health.max_value = unit_info.max_hp
+	$health.value = unit_info.hp
+	
+	unit_info.marked_delete = true
+
 func _ready():
 	$sprite.play("idle")
 	attack_timer = time_manager.create_timer(attack_cooldown)
@@ -52,7 +67,6 @@ func reposition(pos):
 	
 	var diff := target_position - global_position
 	$sprite.flip_h = diff.x < 0
-
 
 func _on_range_area_entered(area):
 	if area is Hurtbox:
