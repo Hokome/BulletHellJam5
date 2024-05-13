@@ -8,5 +8,5 @@
 [node name="battle" type="Node2D"]
 script = ExtResource("1_j42mj")
 player_scene = ExtResource("2_afout")
-squad = ExtResource("3_vaku5")
+squad_scene = ExtResource("3_vaku5")
 enemy = ExtResource("4_1hlqi")

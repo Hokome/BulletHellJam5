@@ -11,11 +11,13 @@ var selected := false
 
 var unit_count: int = 0
 
-func create_units():
-	create_unit(Vector2(100, 0))
-	create_unit(Vector2(-100, 0))
+const UNIT_POS: Array[Vector2] = [
+	Vector2(100, 0),
+	Vector2(-100, 0),
+]
 
-func create_unit(pos):
+func create_unit(unit_info: Map.UnitInfo):
+	var pos = UNIT_POS[unit_count]
 	var anchor = Node2D.new()
 	add_child(anchor)
 	anchor.position = pos

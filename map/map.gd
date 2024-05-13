@@ -15,9 +15,16 @@ class Tile:
 	var type: int = -1
 	var squads: Array[SquadInfo] = []
 	var map_icon: Sprite2D
+	var resolved := false
+	
+	func reset():
+		resolved = false
+		for s in squads:
+			s.pos_locked = false
 
 class SquadInfo:
 	var units: Array[UnitInfo] = []
+	var pos_locked := false
 
 class UnitInfo:
 	var name: String
@@ -63,6 +70,20 @@ func generate_map():
 			tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
 			tiles[x].append(tile)
 
+func move_squads(from: Tile, to: Tile):
+	var diff := to.position - from.position
+	if (diff as Vector2).length_squared() > 1.1: return
+	if from.squads[0].pos_locked: return
+	for s in from.squads:
+		to.squads.append(s)
+		from.squads.erase(s)
+		s.pos_locked = true
+	
+	to.map_icon = from.map_icon
+	from.map_icon = null
+	to.map_icon.translate(diff * TILE_SIZE)
+	selected_tile = to
+
 func _process(delta):
 	cursor.position = get_cursor_world()
 
@@ -75,7 +96,37 @@ func get_cursor_world() -> Vector2:
 func get_cursor_grid() -> Vector2i: return (get_cursor_world() / TILE_SIZE).round()
 
 func _unhandled_input(event):
+	if !visible: return
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		if !event.is_pressed(): return
+		if event.button_index == MOUSE_BUTTON_LEFT:
 			var select_pos := get_cursor_grid()
 			selected_tile = tiles[select_pos.x][select_pos.y]
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			if selected_tile != null and !selected_tile.squads.is_empty():
+				var select_pos := get_cursor_grid()
+				var destination_tile = tiles[select_pos.x][select_pos.y]
+				move_squads(selected_tile, destination_tile)
+
+
+func _on_end_pressed():
+	visible = false
+	map_ui.visible = false
+	$map_camera.enabled = false
+	battle_end_callback()
+
+func battle_end_callback():
+	for tx in tiles:
+		for ty: Tile in tx:
+			if ty.resolved: continue
+			if !ty.squads.is_empty():
+				battle.start_battle(ty.squads)
+				ty.resolved = true
+				return
+			ty.resolved = true
+	visible = true
+	map_ui.visible = true
+	for tx in tiles:
+		for ty: Tile in tx:
+			ty.reset()
+	$map_camera.enabled = true
