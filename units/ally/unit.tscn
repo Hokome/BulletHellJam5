@@ -29,7 +29,8 @@ max_value = 5
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("3_bkyh2")
-animation = &"idle"
+animation = &"run"
+frame_progress = 0.616059
 
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_j47w0")

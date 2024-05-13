@@ -13,6 +13,7 @@ var enemies_in_range: Array[Hurtbox] = []
 var attack_timer: BattleTimer
 
 func _ready():
+	$sprite.play("idle")
 	attack_timer = time_manager.create_timer(attack_cooldown)
 	add_child(attack_timer)
 	attack_timer.name = "attack_timer"
@@ -23,6 +24,7 @@ func _physics_process(delta):
 			is_repositioning = false
 			global_position = target_position
 			velocity = Vector2.ZERO
+			$sprite.animation = "idle"
 		else:
 			var diff = (target_position - global_position)
 			velocity = diff.normalized() * speed
@@ -41,11 +43,15 @@ func can_attack() -> bool: return attack_timer.time_left <= 0
 func is_at_destination(delta) -> bool: return (target_position - global_position).length() <= speed * delta
 
 func reposition(pos):
+	$sprite.animation = "run"
 	is_repositioning = true
 	if pos is Vector2:
 		target_position = pos
 	else:
 		target_position = pos.global_position
+	
+	var diff := target_position - global_position
+	$sprite.flip_h = diff.x < 0
 
 
 func _on_range_area_entered(area):
