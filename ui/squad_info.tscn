@@ -1,39 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://ib0wxl0njjfc"]
+[gd_scene load_steps=5 format=3 uid="uid://ib0wxl0njjfc"]
 
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_hv2nm"]
+[ext_resource type="Script" path="res://ui/squad_ui.gd" id="2_opixs"]
+[ext_resource type="Theme" uid="uid://jlx340yoo0en" path="res://ui/over_button.tres" id="3_5unls"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xqbk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykeis"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.4, 0.4, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvmdg"]
-bg_color = Color(1, 1, 1, 0.196078)
-
-[node name="squad" type="PanelContainer"]
+[node name="squad" type="PanelContainer" node_paths=PackedStringArray("name_label", "select_button", "unit_list", "empty_spot_button")]
 theme = ExtResource("1_hv2nm")
+script = ExtResource("2_opixs")
+name_label = NodePath("vbox/header/margin/name")
+select_button = NodePath("vbox/header/select")
+unit_list = NodePath("vbox/margin/units")
+empty_spot_button = NodePath("vbox/margin/units/empty_spot")
 
-[node name="margin" type="MarginContainer" parent="."]
+[node name="vbox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="header" type="PanelContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="vbox/header"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="vbox" type="VBoxContainer" parent="margin"]
-layout_mode = 2
-
-[node name="name" type="Label" parent="margin/vbox"]
+[node name="name" type="Label" parent="vbox/header/margin"]
 layout_mode = 2
 theme = ExtResource("1_hv2nm")
 text = "Squad 0"
 
-[node name="separator" type="HSeparator" parent="margin/vbox"]
+[node name="select" type="Button" parent="vbox/header"]
+layout_mode = 2
+theme = ExtResource("3_5unls")
+
+[node name="separator" type="HSeparator" parent="vbox"]
 layout_mode = 2
 theme = ExtResource("1_hv2nm")
+theme_override_constants/separation = 0
 
-[node name="units" type="VBoxContainer" parent="margin/vbox"]
+[node name="margin" type="MarginContainer" parent="vbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="units" type="VBoxContainer" parent="vbox/margin"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="select" type="Button" parent="."]
+[node name="empty_spot" type="Button" parent="vbox/margin/units"]
+visible = false
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1xqbk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kvmdg")
+theme = ExtResource("1_hv2nm")
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykeis")
+text = "+"

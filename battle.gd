@@ -2,6 +2,8 @@ class_name Battle extends Node2D
 
 enum Faction {Neutral, Ally, Enemy}
 
+var on_going := false
+
 const STARTING_POS: Array[Vector2] = [
 	Vector2(0, 0),
 	Vector2(400, 0),
@@ -22,6 +24,8 @@ func _ready():
 	player().enabled = false
 
 func start_battle(squads: Array[UM.SquadInfo]):
+	on_going = true
+	
 	squads_info = squads
 	squad_list.clear()
 	visible = true
@@ -63,7 +67,9 @@ func end_battle():
 	for c in get_children():
 		if c.name != "player":
 			c.queue_free()
+	
 	player().enabled = false
+	battle.on_going = false
 	map.battle_end_callback()
 
 func add_decor():

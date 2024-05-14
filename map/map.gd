@@ -12,6 +12,8 @@ const HALF_TILE: int = TILE_SIZE / 2
 
 @onready var cursor: Node2D = $cursor
 
+var fully_resolved := true
+
 class Tile:
 	var position: Vector2i
 	var type: int = -1
@@ -113,24 +115,31 @@ func _unhandled_input(event):
 				move_squad(um.selected_squad, selected_tile, destination_tile)
 
 func _on_end_pressed():
+	fully_resolved = false
 	visible = false
 	map_ui.visible = false
 	$map_camera.enabled = false
 	battle_end_callback()
 
 func battle_end_callback():
+	if fully_resolved: return
+	if battle.on_going: return
+	
 	for tx in tiles:
 		for ty: Tile in tx:
 			if ty.resolved: continue
 			if !ty.squads.is_empty():
 				ty.resolved = true
-				battle.start_battle(ty.squads)
+				battle.start_battle.call_deferred(ty.squads)
 				return
 			ty.resolved = true
+	
 	visible = true
 	map_ui.visible = true
 	for tx in tiles:
 		for ty: Tile in tx:
 			ty.reset()
+	
 	$map_camera.enabled = true
 	selected_tile = null
+	fully_resolved = true

@@ -16,8 +16,12 @@
 
 - [x] Grid
 - [x] Squad selection
-- [ ] Squad movement
+- [x] Squad movement
 - [x] Confirm button
+- [ ] Squad locked indicator
+- [ ] Move units to other squads
+- [ ] Make new squad
+- [ ] Get new units
 
 ## Sketch
 

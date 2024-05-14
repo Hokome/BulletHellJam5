@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj6bg2xfnf5kl"]
+[gd_scene load_steps=5 format=3 uid="uid://dj6bg2xfnf5kl"]
 
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_ckwds"]
 [ext_resource type="Script" path="res://ui/unit_ui.gd" id="2_u1lxs"]
 [ext_resource type="Theme" uid="uid://cnvec1w8fbn2t" path="res://ui/health_theme.tres" id="3_hvtwc"]
+[ext_resource type="Theme" uid="uid://jlx340yoo0en" path="res://ui/over_button.tres" id="4_vfa1g"]
 
-[node name="unit" type="VBoxContainer" node_paths=PackedStringArray("name_label", "hp_bar")]
-custom_minimum_size = Vector2(300, 0)
+[node name="unit" type="PanelContainer" node_paths=PackedStringArray("name_label", "hp_bar", "select_button")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -17,15 +17,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ckwds")
 script = ExtResource("2_u1lxs")
-name_label = NodePath("name")
-hp_bar = NodePath("health")
+name_label = NodePath("margin/vbox/name")
+hp_bar = NodePath("margin/vbox/health")
+select_button = NodePath("select")
 
-[node name="name" type="Label" parent="."]
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="vbox" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="margin/vbox"]
 layout_mode = 2
 text = "John"
 
-[node name="health" type="ProgressBar" parent="."]
+[node name="health" type="ProgressBar" parent="margin/vbox"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("3_hvtwc")
 show_percentage = false
+
+[node name="select" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("4_vfa1g")
