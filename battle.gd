@@ -22,9 +22,13 @@ func _ready():
 	player().enabled = false
 
 func start_battle(squads: Array[UM.SquadInfo]):
-	add_decor()
 	squads_info = squads
+	squad_list.clear()
 	visible = true
+	
+	await get_tree().process_frame
+	
+	add_decor()
 	add_enemy(Vector2(0, -200))
 	add_child(player_scene.instantiate())
 	for i in squads.size():

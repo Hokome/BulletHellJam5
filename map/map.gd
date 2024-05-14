@@ -28,7 +28,7 @@ class Tile:
 					s.units.erase(u)
 		for s in squads:
 			if s.marked_delete:
-				squads.erase(s)
+				remove_squad(s)
 	
 	func add_squad(squad: UM.SquadInfo):
 		squads.append(squad)
@@ -45,8 +45,6 @@ class Tile:
 		if !squads.is_empty(): return
 		
 		map_icon.queue_free()
-
-
 
 @onready var map_ui = $map_ui
 
@@ -79,7 +77,8 @@ func generate_map():
 
 func move_squad(squad: UM.SquadInfo, from: Tile, to: Tile):
 	var diff := to.position - from.position
-	if (diff as Vector2).length_squared() > 1.1: return
+	var length = (diff as Vector2).length_squared()
+	if length > 1 or length == 0: return
 	
 	if squad.pos_locked: return
 	
@@ -124,8 +123,8 @@ func battle_end_callback():
 		for ty: Tile in tx:
 			if ty.resolved: continue
 			if !ty.squads.is_empty():
-				battle.start_battle(ty.squads)
 				ty.resolved = true
+				battle.start_battle(ty.squads)
 				return
 			ty.resolved = true
 	visible = true

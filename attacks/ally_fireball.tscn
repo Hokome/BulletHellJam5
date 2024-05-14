@@ -10,7 +10,7 @@ radius = 13.1529
 script = ExtResource("1_ctm6t")
 speed = 2000.0
 faction = 1
-damage = 5
+damage = 30
 
 [node name="sprite" type="Sprite2D" parent="."]
 self_modulate = Color(0, 1, 0.0666666, 1)
