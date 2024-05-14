@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://ctcw2ywa23o1w" path="res://map/unit_icon.png" id="2_6eg6t"]
 [ext_resource type="Texture2D" uid="uid://b41xlisui4xdv" path="res://square.png" id="3_vaoav"]
 [ext_resource type="Script" path="res://ui/map_ui.gd" id="4_f4x1a"]
-[ext_resource type="PackedScene" uid="uid://ib0wxl0njjfc" path="res://ui/squad_info.tscn" id="5_kjtp6"]
-[ext_resource type="PackedScene" uid="uid://dj6bg2xfnf5kl" path="res://ui/unit_info.tscn" id="6_or1gt"]
+[ext_resource type="PackedScene" uid="uid://ib0wxl0njjfc" path="res://ui/squad_info.tscn" id="6_sl4dd"]
+[ext_resource type="PackedScene" uid="uid://dj6bg2xfnf5kl" path="res://ui/unit_info.tscn" id="7_3ij08"]
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="8_dok8v"]
 
 [node name="map" type="Node2D"]
@@ -26,8 +26,8 @@ texture = ExtResource("3_vaoav")
 
 [node name="map_ui" type="CanvasLayer" parent="."]
 script = ExtResource("4_f4x1a")
-squad_ui_scene = ExtResource("5_kjtp6")
-unit_ui_scene = ExtResource("6_or1gt")
+squad_ui_scene = ExtResource("6_sl4dd")
+unit_ui_scene = ExtResource("7_3ij08")
 
 [node name="right" type="MarginContainer" parent="map_ui"]
 custom_minimum_size = Vector2(100, 0)
