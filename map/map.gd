@@ -29,6 +29,22 @@ class Tile:
 		for s in squads:
 			if s.marked_delete:
 				squads.erase(s)
+	
+	func add_squad(squad: UM.SquadInfo):
+		squads.append(squad)
+		if squads.size() != 1: return
+			
+		map_icon = Sprite2D.new()
+		map_icon.texture = map.squad_texture
+		map.add_child(map_icon)
+		map_icon.position = map.grid_to_world(position)
+	
+	func remove_squad(squad: UM.SquadInfo):
+		squads.erase(squad)
+		
+		if !squads.is_empty(): return
+		
+		map_icon.queue_free()
 
 
 
@@ -67,20 +83,11 @@ func move_squad(squad: UM.SquadInfo, from: Tile, to: Tile):
 	
 	if squad.pos_locked: return
 	
-	from.squads.erase(squad)
-	to.squads.append(squad)
+	from.remove_squad(squad)
+	to.add_squad(squad)
 	squad.pos_locked = true
 	
-	to.map_icon = from.map_icon
-	from.map_icon = null
-	to.map_icon.translate(diff * TILE_SIZE)
-	selected_tile = to
-
-func set_icon(tile: Tile):
-	tile.map_icon = Sprite2D.new()
-	tile.map_icon.texture = squad_texture
-	add_child(tile.map_icon)
-	tile.map_icon.position = grid_to_world(tile.position)
+	map_ui.display_squads(to.squads)
 
 func _process(_delta):
 	cursor.position = get_cursor_world()

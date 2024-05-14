@@ -37,13 +37,12 @@ func create_squad() -> SquadInfo:
 
 func add_squads():
 	var tile: Map.Tile = map.tiles[6][6]
-	tile.squads = [create_squad(), create_squad()]
+	tile.add_squad(create_squad())
+	tile.add_squad(create_squad())
 	
 	add_unit(tile.squads[0], "John")
 	add_unit(tile.squads[0], "Kevin")
 	add_unit(tile.squads[1], "Bob")
-	
-	map.set_icon(tile)
 
 func add_unit(squad: SquadInfo, unit_name: String):
 	var unit := UnitInfo.new()

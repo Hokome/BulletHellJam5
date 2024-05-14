@@ -15,7 +15,7 @@
 ### Big map
 
 - [x] Grid
-- [ ] Squad selection
+- [x] Squad selection
 - [ ] Squad movement
 - [x] Confirm button
 
