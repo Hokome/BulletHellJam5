@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ib0wxl0njjfc"]
+[gd_scene load_steps=4 format=3 uid="uid://ib0wxl0njjfc"]
 
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_hv2nm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xqbk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvmdg"]
+bg_color = Color(1, 1, 1, 0.196078)
 
 [node name="squad" type="PanelContainer"]
 theme = ExtResource("1_hv2nm")
@@ -27,3 +32,8 @@ theme = ExtResource("1_hv2nm")
 [node name="units" type="VBoxContainer" parent="margin/vbox"]
 layout_mode = 2
 theme_override_constants/separation = 20
+
+[node name="select" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1xqbk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kvmdg")

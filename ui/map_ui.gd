@@ -8,7 +8,7 @@ func display_squads(squad_list: Array):
 	for c in squads.get_children():
 		c.queue_free()
 	
-	for squad_info in squad_list:
+	for squad_info: UM.SquadInfo in squad_list:
 		var sq_ui := squad_ui.instantiate()
 		squads.add_child(sq_ui)
 		sq_ui.get_node("margin/vbox/name").text = squad_info.name
@@ -20,3 +20,5 @@ func display_squads(squad_list: Array):
 			u_ui.name_label.text = unit_info.name
 			u_ui.hp_bar.max_value = unit_info.max_hp
 			u_ui.hp_bar.value = unit_info.hp
+		
+		sq_ui.get_node("select").pressed.connect(um.select_squad.bind(squad_info.id))

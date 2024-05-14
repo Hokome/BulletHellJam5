@@ -14,10 +14,10 @@
 
 ### Big map
 
-- [ ] Grid
+- [x] Grid
 - [ ] Squad selection
 - [ ] Squad movement
-- [ ] Confirm button
+- [x] Confirm button
 
 ## Sketch
 

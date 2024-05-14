@@ -9,6 +9,9 @@ var selected_squad: SquadInfo:
 var full_squad_dictionary: Dictionary = {}
 var next_id: int = 1
 
+func select_squad(id: int):
+	selected_squad = full_squad_dictionary[id]
+
 class SquadInfo extends RefCounted:
 	var units: Array[UnitInfo] = []
 	var id: int
