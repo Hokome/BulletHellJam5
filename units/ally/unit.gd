@@ -12,14 +12,14 @@ var enemies_in_range: Array[Hurtbox] = []
 
 var attack_timer: BattleTimer
 
-var unit_info: Map.UnitInfo
+var unit_info: UM.UnitInfo
 
 func update_unit_info():
 	unit_info.hp = $health.value
 	
 	unit_info.marked_delete = false
 
-func import_unit(info: Map.UnitInfo):
+func import_unit(info: UM.UnitInfo):
 	unit_info = info
 	
 	$health.max_value = unit_info.max_hp

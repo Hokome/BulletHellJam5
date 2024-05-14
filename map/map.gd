@@ -3,9 +3,11 @@ class_name Map extends Node2D
 @export var squad_texture: Texture
 
 const MAP_SIZE: int = 12
+@warning_ignore("integer_division")
 const HALF_MAP: int = MAP_SIZE / 2
 
 const TILE_SIZE: int = 512
+@warning_ignore("integer_division")
 const HALF_TILE: int = TILE_SIZE / 2
 
 @onready var cursor: Node2D = $cursor
@@ -13,7 +15,7 @@ const HALF_TILE: int = TILE_SIZE / 2
 class Tile:
 	var position: Vector2i
 	var type: int = -1
-	var squads: Array[SquadInfo] = []
+	var squads: Array[UM.SquadInfo] = []
 	var map_icon: Sprite2D
 	var resolved := false
 	
@@ -28,16 +30,7 @@ class Tile:
 			if s.marked_delete:
 				squads.erase(s)
 
-class SquadInfo extends RefCounted:
-	var units: Array[UnitInfo] = []
-	var pos_locked := false
-	var marked_delete := false
 
-class UnitInfo extends RefCounted:
-	var name: String
-	var hp: int
-	var max_hp: int
-	var marked_delete := false
 
 @onready var map_ui = $map_ui
 
@@ -45,6 +38,7 @@ var tiles := []
 var selected_tile: Tile:
 	set(val):
 		selected_tile = val
+		um.selected_squad = null
 		if selected_tile != null:
 			map_ui.display_squads(selected_tile.squads)
 		else:
@@ -52,27 +46,9 @@ var selected_tile: Tile:
 
 func _ready():
 	generate_map()
-	add_squads()
 	$map_camera.translate(Vector2.ONE * TILE_SIZE * HALF_MAP)
-
-func add_squads():
-	var tile: Tile = tiles[6][6]
-	tile.squads = [SquadInfo.new()]
 	
-	tile.map_icon = Sprite2D.new()
-	tile.map_icon.texture = squad_texture
-	add_child(tile.map_icon)
-	tile.map_icon.position = grid_to_world(tile.position)
-	
-	add_unit(tile.squads[0], "John")
-	add_unit(tile.squads[0], "Kevin")
-
-func add_unit(squad: SquadInfo, unit_name: String):
-	var unit := UnitInfo.new()
-	unit.name = unit_name
-	unit.max_hp = 5
-	unit.hp = unit.max_hp
-	squad.units.append(unit)
+	um.add_squads()
 
 func generate_map():
 	var tile_map: TileMap = $tiles
@@ -85,21 +61,28 @@ func generate_map():
 			tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
 			tiles[x].append(tile)
 
-func move_squads(from: Tile, to: Tile):
+func move_squad(squad: UM.SquadInfo, from: Tile, to: Tile):
 	var diff := to.position - from.position
 	if (diff as Vector2).length_squared() > 1.1: return
-	if from.squads[0].pos_locked: return
-	for s in from.squads:
-		to.squads.append(s)
-		from.squads.erase(s)
-		s.pos_locked = true
+	
+	if squad.pos_locked: return
+	
+	from.squads.erase(squad)
+	to.squads.append(squad)
+	squad.pos_locked = true
 	
 	to.map_icon = from.map_icon
 	from.map_icon = null
 	to.map_icon.translate(diff * TILE_SIZE)
 	selected_tile = to
 
-func _process(delta):
+func set_icon(tile: Tile):
+	tile.map_icon = Sprite2D.new()
+	tile.map_icon.texture = squad_texture
+	add_child(tile.map_icon)
+	tile.map_icon.position = grid_to_world(tile.position)
+
+func _process(_delta):
 	cursor.position = get_cursor_world()
 
 func grid_to_world(grid_pos: Vector2i) -> Vector2: return (grid_pos as Vector2) * TILE_SIZE - Vector2.ONE * HALF_TILE
@@ -118,11 +101,10 @@ func _unhandled_input(event):
 			var select_pos := get_cursor_grid()
 			selected_tile = tiles[select_pos.x][select_pos.y]
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			if selected_tile != null and !selected_tile.squads.is_empty():
+			if selected_tile != null and um.selected_squad != null:
 				var select_pos := get_cursor_grid()
 				var destination_tile = tiles[select_pos.x][select_pos.y]
-				move_squads(selected_tile, destination_tile)
-
+				move_squad(um.selected_squad, selected_tile, destination_tile)
 
 func _on_end_pressed():
 	visible = false

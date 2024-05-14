@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://ib0wxl0njjfc"]
+[gd_scene load_steps=2 format=3 uid="uid://ib0wxl0njjfc"]
+
+[ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_hv2nm"]
 
 [node name="squad" type="PanelContainer"]
+theme = ExtResource("1_hv2nm")
 
 [node name="margin" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -9,6 +12,18 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="units" type="VBoxContainer" parent="margin"]
+[node name="vbox" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="margin/vbox"]
+layout_mode = 2
+theme = ExtResource("1_hv2nm")
+text = "Squad 0"
+
+[node name="separator" type="HSeparator" parent="margin/vbox"]
+layout_mode = 2
+theme = ExtResource("1_hv2nm")
+
+[node name="units" type="VBoxContainer" parent="margin/vbox"]
 layout_mode = 2
 theme_override_constants/separation = 20

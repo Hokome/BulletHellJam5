@@ -10,18 +10,18 @@ const STARTING_POS: Array[Vector2] = [
 
 @export var player_scene: PackedScene
 @export var squad_scene: PackedScene
-@export var enemy: PackedScene
+@export var enemy_scene: PackedScene
 
-var squads_info: Array[Map.SquadInfo]
+var squads_info: Array[UM.SquadInfo]
 var squad_list: Array[Squad] = []
 var enemy_list: Array[Node2D] = []
 
 func _ready():
 	visible = false
-	var player = player_scene.instantiate()
-	player.enabled = false
+	add_child(player_scene.instantiate())
+	player().enabled = false
 
-func start_battle(squads: Array[Map.SquadInfo]):
+func start_battle(squads: Array[UM.SquadInfo]):
 	squads_info = squads
 	visible = true
 	add_enemy(Vector2(0, -200))
@@ -29,7 +29,7 @@ func start_battle(squads: Array[Map.SquadInfo]):
 	for i in squads.size():
 		add_squad(squads[i], STARTING_POS[i])
 
-func add_squad(squad_info: Map.SquadInfo, pos: Vector2):
+func add_squad(squad_info: UM.SquadInfo, pos: Vector2):
 	var squad: Squad = squad_scene.instantiate()
 	add_child(squad)
 	squad.position = pos
@@ -38,7 +38,7 @@ func add_squad(squad_info: Map.SquadInfo, pos: Vector2):
 		squad.create_unit(unit)
 	
 func add_enemy(pos):
-	var new_enemy = enemy.instantiate()
+	var new_enemy = enemy_scene.instantiate()
 	add_child(new_enemy)
 	new_enemy.position = pos
 	enemy_list.append(new_enemy)

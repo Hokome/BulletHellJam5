@@ -11,8 +11,9 @@ func display_squads(squad_list: Array):
 	for squad_info in squad_list:
 		var sq_ui := squad_ui.instantiate()
 		squads.add_child(sq_ui)
+		sq_ui.get_node("margin/vbox/name").text = squad_info.name
 		
-		var units = sq_ui.get_node("margin/units")
+		var units = sq_ui.get_node("margin/vbox/units")
 		for unit_info in squad_info.units:
 			var u_ui: UnitUI = unit_ui.instantiate()
 			units.add_child(u_ui)

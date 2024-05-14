@@ -45,6 +45,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="squads" type="VBoxContainer" parent="map_ui/right"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="end" type="Button" parent="map_ui"]
 anchors_preset = 2
@@ -54,6 +55,6 @@ offset_top = -31.0
 offset_right = 38.0
 grow_vertical = 0
 theme = ExtResource("8_dok8v")
-text = "End"
+text = "Go!"
 
 [connection signal="pressed" from="map_ui/end" to="." method="_on_end_pressed"]

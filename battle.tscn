@@ -9,4 +9,4 @@
 script = ExtResource("1_j42mj")
 player_scene = ExtResource("2_afout")
 squad_scene = ExtResource("3_vaku5")
-enemy = ExtResource("4_1hlqi")
+enemy_scene = ExtResource("4_1hlqi")

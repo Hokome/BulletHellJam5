@@ -5,7 +5,7 @@ extends Node2D
 
 var shooting := false
 
-func _process(delta):
+func _process(_delta):
 	if !shooting:
 		shoot()
 

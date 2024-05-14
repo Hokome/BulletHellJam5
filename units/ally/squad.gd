@@ -16,7 +16,7 @@ const UNIT_POS: Array[Vector2] = [
 	Vector2(-100, 0),
 ]
 
-func create_unit(unit_info: Map.UnitInfo):
+func create_unit(unit_info: UM.UnitInfo):
 	var pos = UNIT_POS[units.size()]
 	var anchor = Node2D.new()
 	add_child(anchor)
