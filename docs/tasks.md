@@ -24,14 +24,14 @@
 - [x] Unit run animation
 - [x] Fireball projectile
 - [x] Basic enemy
-- [ ] Flag for squad anchor point
-- [ ] Bigger enemy with weakpoint on the back
-- [ ] Lightning bolt (512x32)
-- [ ] Magic circle
-- [ ] Battlefield decorations (weeds, flowers etc.)
-- [ ] Battlefield background (grass)
+- [x] Flag for squad anchor point
+- [x] Bigger enemy with weakpoint on the back
+- [x] Lightning bolt (512x32)
+- [x] Magic circle
+- [x] Battlefield decorations (weeds, flowers etc.)
+- [x] Battlefield background (grass)
 
 ### Big map
 
-- [ ] Grass tile (1024x1024)
-- [ ] Town tile
+- [x] Grass tile (1024x1024)
+- [x] Town tile

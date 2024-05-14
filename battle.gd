@@ -22,6 +22,7 @@ func _ready():
 	player().enabled = false
 
 func start_battle(squads: Array[UM.SquadInfo]):
+	add_decor()
 	squads_info = squads
 	visible = true
 	add_enemy(Vector2(0, -200))
@@ -61,5 +62,6 @@ func end_battle():
 	player().enabled = false
 	map.battle_end_callback()
 
-
+func add_decor():
+	pass
 func player() -> Player: return $player as Player
