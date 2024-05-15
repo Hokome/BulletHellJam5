@@ -14,8 +14,8 @@ const STARTING_POS: Array[Vector2] = [
 @export var squad_scene: PackedScene
 @export var enemy_scene: PackedScene
 
-var squads_info: Array[UM.SquadInfo]
-var squad_list: Array[Squad] = []
+var squads_info: Array[UM.Squad]
+var squad_list: Array[SquadController] = []
 var enemy_list: Array[Node2D] = []
 
 func _ready():
@@ -23,7 +23,7 @@ func _ready():
 	add_child(player_scene.instantiate())
 	player().enabled = false
 
-func start_battle(squads: Array[UM.SquadInfo]):
+func start_battle(squads: Array[UM.Squad]):
 	on_going = true
 	
 	squads_info = squads
@@ -38,8 +38,8 @@ func start_battle(squads: Array[UM.SquadInfo]):
 	for i in squads.size():
 		add_squad(squads[i], STARTING_POS[i])
 
-func add_squad(squad_info: UM.SquadInfo, pos: Vector2):
-	var squad: Squad = squad_scene.instantiate()
+func add_squad(squad_info: UM.Squad, pos: Vector2):
+	var squad: SquadController = squad_scene.instantiate()
 	add_child(squad)
 	squad.position = pos
 	squad_list.append(squad)

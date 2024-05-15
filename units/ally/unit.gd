@@ -1,10 +1,10 @@
-class_name Unit extends CharacterBody2D
+class_name UnitController extends CharacterBody2D
 
 @export var speed: float
 @export var attack_cooldown: float
 @export var projectile_scene: PackedScene
 
-var squad: Squad
+var squad: SquadController
 var target_position: Vector2
 var is_repositioning: bool
 
@@ -12,14 +12,14 @@ var enemies_in_range: Array[Hurtbox] = []
 
 var attack_timer: BattleTimer
 
-var unit_info: UM.UnitInfo
+var unit_info: UM.Unit
 
 func update_unit_info():
 	unit_info.hp = $health.value
 	
 	unit_info.marked_delete = false
 
-func import_unit(info: UM.UnitInfo):
+func import_unit(info: UM.Unit):
 	unit_info = info
 	
 	$health.max_value = unit_info.max_hp

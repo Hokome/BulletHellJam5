@@ -17,7 +17,7 @@ var fully_resolved := true
 class Tile:
 	var position: Vector2i
 	var type: int = -1
-	var squads: Array[UM.SquadInfo] = []
+	var squads: Array[UM.Squad] = []
 	var map_icon: Sprite2D
 	var resolved := false
 	
@@ -32,7 +32,7 @@ class Tile:
 			if s.marked_delete:
 				remove_squad(s)
 	
-	func add_squad(squad: UM.SquadInfo):
+	func add_squad(squad: UM.Squad):
 		squads.append(squad)
 		if squads.size() != 1: return
 			
@@ -41,7 +41,7 @@ class Tile:
 		map.add_child(map_icon)
 		map_icon.position = map.grid_to_world(position)
 	
-	func remove_squad(squad: UM.SquadInfo):
+	func remove_squad(squad: UM.Squad):
 		squads.erase(squad)
 		
 		if !squads.is_empty(): return
@@ -54,6 +54,8 @@ var tiles := []
 var selected_tile: Tile:
 	set(val):
 		selected_tile = val
+		map_ui.is_editing = false
+		um.selected_unit = null
 		um.selected_squad = null
 		if selected_tile != null:
 			map_ui.display_squads(selected_tile.squads)
@@ -77,7 +79,7 @@ func generate_map():
 			tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
 			tiles[x].append(tile)
 
-func move_squad(squad: UM.SquadInfo, from: Tile, to: Tile):
+func move_squad(squad: UM.Squad, from: Tile, to: Tile):
 	var diff := to.position - from.position
 	var length = (diff as Vector2).length_squared()
 	if length > 1 or length == 0: return

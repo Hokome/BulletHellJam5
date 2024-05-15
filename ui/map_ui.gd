@@ -10,6 +10,7 @@ var is_editing := false:
 		is_editing = val
 		for s: SquadUI in squad_list.get_children():
 			s.select_button.visible = !is_editing
+			s.empty_spot_button.visible = is_editing
 
 func _ready():
 	display_squads([])
@@ -23,7 +24,7 @@ func display_squads(squads: Array):
 	for c in squad_list.get_children():
 		c.queue_free()
 	
-	for squad_info: UM.SquadInfo in squads:
+	for squad_info: UM.Squad in squads:
 		var squad_ui: SquadUI = squad_ui_scene.instantiate()
 		squad_list.add_child(squad_ui)
 		squad_ui.name_label.text = squad_info.name

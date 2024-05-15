@@ -1,7 +1,7 @@
 class_name Player extends Camera2D
 
-var hovered_squad: Squad
-var selected_squad: Squad
+var hovered_squad: SquadController
+var selected_squad: SquadController
 
 func _process(_delta):
 	if time_manager.paused: return

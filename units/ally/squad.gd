@@ -1,4 +1,4 @@
-class_name Squad extends Area2D
+class_name SquadController extends Area2D
 
 signal anchor_changed
 signal target_in_range
@@ -9,21 +9,21 @@ signal target_in_range
 var hovered := false
 var selected := false
 
-var units: Array[Unit] = []
+var units: Array[UnitController] = []
 
 const UNIT_POS: Array[Vector2] = [
 	Vector2(100, 0),
 	Vector2(-100, 0),
 ]
 
-func create_unit(unit_info: UM.UnitInfo):
+func create_unit(unit_info: UM.Unit):
 	var pos = UNIT_POS[units.size()]
 	var anchor = Node2D.new()
 	add_child(anchor)
 	anchor.position = pos
 	anchor.name = "anchor"
 	
-	var unit: Unit = test_unit.instantiate()
+	var unit: UnitController = test_unit.instantiate()
 	get_parent().add_child(unit)
 	unit.global_position = anchor.global_position
 	unit.import_unit(unit_info)
