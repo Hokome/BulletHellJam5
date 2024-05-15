@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://units/ally/unit_controller.gd" id="1_jrvp2"]
 [ext_resource type="Script" path="res://units/health.gd" id="2_ogbsk"]
-[ext_resource type="PackedScene" uid="uid://d2k6onwm0ddy8" path="res://attacks/ally_fireball.tscn" id="2_wv6pl"]
+[ext_resource type="PackedScene" uid="uid://d2k6onwm0ddy8" path="res://attacks/ally_fireball.tscn" id="2_r4ga7"]
 [ext_resource type="SpriteFrames" uid="uid://cjfujb72qqmkf" path="res://units/ally/unit_frames.tres" id="3_bkyh2"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="3_e0fdt"]
 
@@ -19,8 +19,8 @@ radius = 500.0
 motion_mode = 1
 script = ExtResource("1_jrvp2")
 speed = 200.0
-attack_cooldown = 0.5
-projectile_scene = ExtResource("2_wv6pl")
+attack_cooldown = 2.0
+projectile_scene = ExtResource("2_r4ga7")
 
 [node name="health" type="Node2D" parent="."]
 script = ExtResource("2_ogbsk")
