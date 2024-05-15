@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dotqievq6vu1x"]
+[gd_scene load_steps=4 format=3 uid="uid://dotqievq6vu1x"]
 
 [ext_resource type="Script" path="res://units/unit_manager.gd" id="1_25nkn"]
+[ext_resource type="SpriteFrames" uid="uid://dtflyc0m6vvld" path="res://units/ally/hair/hair_goku_frames.tres" id="2_r0y83"]
+[ext_resource type="SpriteFrames" uid="uid://b7xbm3hpw8ffq" path="res://units/ally/hair/hair_short_frames.tres" id="3_06wpg"]
 
 [node name="um" type="Node"]
 script = ExtResource("1_25nkn")
-hair_colors = PackedColorArray(0.221665, 0.172173, 0.115206, 1)
+hair_colors = PackedColorArray(0.221665, 0.172173, 0.115206, 1, 0.764758, 0.675246, 0.482968, 1, 0.167356, 0.167356, 0.167356, 1, 0.615407, 0.615407, 0.615407, 1)
+hair_styles = Array[SpriteFrames]([ExtResource("2_r0y83"), ExtResource("3_06wpg")])

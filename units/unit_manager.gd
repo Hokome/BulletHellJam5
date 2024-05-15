@@ -114,7 +114,7 @@ class UnitStat:
 		if type == StatType.Vitality:
 			value = roundf(value)
 	
-	func _to_string():
+	func type_to_string() -> String:
 		var type_s: String = "None"
 		match type:
 			StatType.Vitality:
@@ -125,7 +125,9 @@ class UnitStat:
 				type_s = "Damage"
 			StatType.Support:
 				type_s = "Support"
-		
+		return type_s
+	
+	func intensity_to_string() -> String:
 		var intensity_s: String = "None"
 		match intensity:
 			StatIntensity.Low:
@@ -134,9 +136,13 @@ class UnitStat:
 				intensity_s = "Med"
 			StatIntensity.High:
 				intensity_s = "High"
+		return intensity_s
+
+	func _to_string():
+		var type_s: String = type_to_string()
+		var intensity_s: String = intensity_to_string()
 		
 		return "%s: %s (%s)" % [type_s, intensity_s, value]
-
 
 class Unit extends RefCounted:
 	var name: String
@@ -152,25 +158,6 @@ class Unit extends RefCounted:
 	
 	func remove_from_squad():
 		squad.remove_unit(self)
-	
-	static func create_random() -> Unit:
-		var unit := Unit.new()
-		var is_male: bool = randi() % 2;
-		if is_male:
-			unit.name = MASCULINE_NAMES.pick_random()
-		else:
-			unit.name = FEMININE_NAMES.pick_random()
-		
-		var hair_style_index = 0
-		var hair_color_index = 0
-		#unit.hair_style = um.hair_styles[hair_style_index]
-		unit.hair_color = um.hair_colors[hair_color_index]
-		
-		unit.generate_stats(3)
-		
-		unit.hp = unit.get_max_hp()
-		
-		return unit
 	
 	func get_max_hp() -> float:
 		return stats[StatType.Vitality].value
@@ -204,6 +191,24 @@ class Unit extends RefCounted:
 		
 		print(stats)
 
+func create_random_unit() -> Unit:
+		var unit := Unit.new()
+		var is_male: bool = randi() % 2;
+		if is_male:
+			unit.name = MASCULINE_NAMES.pick_random()
+		else:
+			unit.name = FEMININE_NAMES.pick_random()
+		
+		var hair_style_index = randi_range(0, hair_styles.size() - 1)
+		var hair_color_index = randi_range(0, hair_colors.size() -1)
+		unit.hair_style = hair_styles[hair_style_index]
+		unit.hair_color = hair_colors[hair_color_index]
+		
+		unit.generate_stats(3)
+		
+		unit.hp = unit.get_max_hp()
+		
+		return unit
 func create_squad() -> Squad:
 	var squad: Squad = Squad.new()
 	full_squad_dictionary[next_id] = squad

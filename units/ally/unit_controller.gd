@@ -22,8 +22,10 @@ func update_unit_info():
 func import_unit(info: UM.Unit):
 	unit_info = info
 	
-	$health.max_value = unit_info.max_hp
+	$health.max_value = unit_info.get_max_hp()
 	$health.value = unit_info.hp
+	
+	speed = info.get_speed()
 	
 	unit_info.marked_delete = true
 

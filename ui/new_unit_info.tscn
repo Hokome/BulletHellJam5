@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjgt6o7osy4s"]
+[gd_scene load_steps=8 format=3 uid="uid://cjgt6o7osy4s"]
 
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_hpeeg"]
 [ext_resource type="Script" path="res://ui/unit_ui.gd" id="2_ln28w"]
 [ext_resource type="Texture2D" uid="uid://dtuhcjag2ck76" path="res://units/ally/unit.png" id="3_8f3qg"]
 [ext_resource type="Theme" uid="uid://jlx340yoo0en" path="res://ui/over_button.tres" id="4_at4av"]
+[ext_resource type="Texture2D" uid="uid://n805cvcuaeqt" path="res://units/ally/hair/hair_goku.png" id="4_rroah"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70qu3"]
 atlas = ExtResource("3_8f3qg")
 region = Rect2(0, 0, 256, 256)
 
-[node name="unit" type="PanelContainer" node_paths=PackedStringArray("name_label", "select_button")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qqe1"]
+atlas = ExtResource("4_rroah")
+region = Rect2(0, 0, 256, 256)
+
+[node name="unit" type="PanelContainer" node_paths=PackedStringArray("name_label", "hair_image", "select_button")]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -23,6 +28,7 @@ grow_vertical = 2
 theme = ExtResource("1_hpeeg")
 script = ExtResource("2_ln28w")
 name_label = NodePath("margin/vbox/name")
+hair_image = NodePath("margin/vbox/character_margin/hair")
 select_button = NodePath("select")
 
 [node name="margin" type="MarginContainer" parent="."]
@@ -42,9 +48,18 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
+[node name="background" type="ColorRect" parent="margin/vbox/character_margin"]
+layout_mode = 2
+color = Color(0.259294, 0.259294, 0.259294, 1)
+
 [node name="character" type="TextureRect" parent="margin/vbox/character_margin"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_70qu3")
+expand_mode = 5
+
+[node name="hair" type="TextureRect" parent="margin/vbox/character_margin"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_8qqe1")
 expand_mode = 5
 
 [node name="name" type="Label" parent="margin/vbox"]

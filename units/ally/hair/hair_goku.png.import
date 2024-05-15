@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://401vgw7ej5cj"
-path="res://.godot/imported/hair.png-171ff7ae19ba163b7e8755af57f59708.ctex"
+uid="uid://n805cvcuaeqt"
+path="res://.godot/imported/hair_goku.png-4fc630fc8eb9ef21a14cf29d42f5272f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://units/ally/hair.png"
-dest_files=["res://.godot/imported/hair.png-171ff7ae19ba163b7e8755af57f59708.ctex"]
+source_file="res://units/ally/hair/hair_goku.png"
+dest_files=["res://.godot/imported/hair_goku.png-4fc630fc8eb9ef21a14cf29d42f5272f.ctex"]
 
 [params]
 

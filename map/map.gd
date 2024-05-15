@@ -81,7 +81,7 @@ func _ready():
 	is_selecting_new_unit = true
 	
 	for i in 2:
-		var starter_units: Array[UM.Unit] = [UM.Unit.create_random(), UM.Unit.create_random()]
+		var starter_units: Array[UM.Unit] = [um.create_random_unit(), um.create_random_unit()]
 			
 		map_ui.display_new_units(starter_units)
 		
