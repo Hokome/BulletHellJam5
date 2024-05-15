@@ -26,6 +26,7 @@ class Squad extends RefCounted:
 	func add_unit(unit: Unit):
 		unit.squad = self
 		units.append(unit)
+		marked_delete = false
 	
 	func remove_unit(unit: Unit):
 		unit.squad = null
@@ -51,6 +52,7 @@ func create_squad() -> Squad:
 	next_id += 1
 	
 	squad.name = "Squad %s" % squad.id
+	squad.marked_delete = true
 	
 	return squad
 

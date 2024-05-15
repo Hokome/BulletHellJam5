@@ -4,7 +4,9 @@ class_name SquadUI
 @export var name_label: Label
 @export var select_button: Button
 @export var unit_list: Control
+
 @export var empty_spot_button: Button
+@export var trash_button: Button
 
 func sort_children():
 	var last_index := get_child_count() - 1

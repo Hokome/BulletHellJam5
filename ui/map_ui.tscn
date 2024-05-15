@@ -33,6 +33,12 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_constants/separation = 20
 
+[node name="new_squad" type="Button" parent="right/vbox"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_xgdp5")
+text = "+"
+
 [node name="edit" type="Button" parent="right/vbox"]
 layout_mode = 2
 theme = ExtResource("4_xgdp5")
@@ -55,3 +61,5 @@ custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme = ExtResource("4_xgdp5")
 text = "Go!"
+
+[connection signal="pressed" from="right/vbox/new_squad" to="." method="_on_new_squad_pressed"]
