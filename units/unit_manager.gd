@@ -71,14 +71,83 @@ const FEMININE_NAMES = [
 @export var hair_colors: PackedColorArray
 @export var hair_styles: Array[SpriteFrames]
 
+enum StatIntensity {None = 0, Low = 1, Med = 2, High = 3}
+enum StatType {None, Vitality, Mobility, Damage, Support}
+
+const STAT_BOUNDS = {
+	StatType.Vitality:
+		{
+			StatIntensity.Low: [10, 15],
+			StatIntensity.Med: [20, 30],
+			StatIntensity.High: [35, 50],
+		},
+	StatType.Mobility:
+		{
+			StatIntensity.Low: [100, 150],
+			StatIntensity.Med: [200, 250],
+			StatIntensity.High: [300, 350],
+		},
+	StatType.Damage:
+		{
+			StatIntensity.Low: [0.6, 0.8],
+			StatIntensity.Med: [1, 1.2],
+			StatIntensity.High: [1.5, 2],
+		},
+	StatType.Support:
+		{
+			StatIntensity.None: [0, 0],
+			StatIntensity.Low: [0.4, 0.6],
+			StatIntensity.Med: [0.8, 1],
+			StatIntensity.High: [1.2, 1.5],
+		},
+}
+
+class UnitStat:
+	var type: StatType = StatType.None
+	var intensity: StatIntensity
+	var value: float
+	
+	func generate_precise():
+		var bounds = STAT_BOUNDS[type][intensity]
+		value = randf_range(bounds[0], bounds[1])
+		
+		if type == StatType.Vitality:
+			value = roundf(value)
+	
+	func _to_string():
+		var type_s: String = "None"
+		match type:
+			StatType.Vitality:
+				type_s = "Vitality"
+			StatType.Mobility:
+				type_s = "Mobility"
+			StatType.Damage:
+				type_s = "Damage"
+			StatType.Support:
+				type_s = "Support"
+		
+		var intensity_s: String = "None"
+		match intensity:
+			StatIntensity.Low:
+				intensity_s = "Low"
+			StatIntensity.Med:
+				intensity_s = "Med"
+			StatIntensity.High:
+				intensity_s = "High"
+		
+		return "%s: %s (%s)" % [type_s, intensity_s, value]
+
+
 class Unit extends RefCounted:
 	var name: String
 	var hp: int
-	var max_hp: int
-	var squad: Squad
+	
+	var stats: Dictionary = {}
+	
 	var hair_style: SpriteFrames
 	var hair_color: Color
 	
+	var squad: Squad
 	var marked_delete := false
 	
 	func remove_from_squad():
@@ -97,10 +166,43 @@ class Unit extends RefCounted:
 		#unit.hair_style = um.hair_styles[hair_style_index]
 		unit.hair_color = um.hair_colors[hair_color_index]
 		
-		unit.max_hp = 5
-		unit.hp = unit.max_hp
+		unit.generate_stats(3)
+		
+		unit.hp = unit.get_max_hp()
 		
 		return unit
+	
+	func get_max_hp() -> float:
+		return stats[StatType.Vitality].value
+	func get_speed() -> float:
+		return stats[StatType.Mobility].value
+	
+	func create_stat(type: StatType, initial: StatIntensity = StatIntensity.Low):
+		var stat := UnitStat.new()
+		stat.type = type
+		stat.intensity = initial
+		stats[type] = stat
+	
+	func increment_stat(type: StatType) -> bool:
+		var stat: UnitStat = stats[type]
+		if stat.intensity == StatIntensity.High: return false
+		stat.intensity += 1
+		return true
+	
+	func generate_stats(budget: int):
+		create_stat(StatType.Vitality)
+		create_stat(StatType.Mobility)
+		create_stat(StatType.Damage)
+		create_stat(StatType.Support, StatIntensity.None)
+		
+		while budget: 
+			var stat = randi_range(1, 4)
+			if increment_stat(stat): budget -= 1
+		
+		for stat in stats.values():
+			stat.generate_precise()
+		
+		print(stats)
 
 func create_squad() -> Squad:
 	var squad: Squad = Squad.new()
