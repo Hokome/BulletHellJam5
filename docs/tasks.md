@@ -21,7 +21,8 @@
 - [ ] Squad locked indicator
 - [x] Move units to other squads
 - [x] Make new squad
-- [ ] Get new units
+- [x] Get new units
+- [ ]
 
 ## Sketch
 

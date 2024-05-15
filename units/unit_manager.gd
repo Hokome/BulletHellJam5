@@ -34,7 +34,7 @@ class Squad extends RefCounted:
 		if units.is_empty():
 			marked_delete = true
 
-const UNIT_NAMES = [
+const MASCULINE_NAMES = [
 	"John",
 	"Bob",
 	"Kevin",
@@ -68,11 +68,16 @@ const FEMININE_NAMES = [
 	"Luana",
 ]
 
+@export var hair_colors: PackedColorArray
+@export var hair_styles: Array[SpriteFrames]
+
 class Unit extends RefCounted:
 	var name: String
 	var hp: int
 	var max_hp: int
 	var squad: Squad
+	var hair_style: SpriteFrames
+	var hair_color: Color
 	
 	var marked_delete := false
 	
@@ -81,7 +86,17 @@ class Unit extends RefCounted:
 	
 	static func create_random() -> Unit:
 		var unit := Unit.new()
-		unit.name = FEMININE_NAMES.pick_random()
+		var is_male: bool = randi() % 2;
+		if is_male:
+			unit.name = MASCULINE_NAMES.pick_random()
+		else:
+			unit.name = FEMININE_NAMES.pick_random()
+		
+		var hair_style_index = 0
+		var hair_color_index = 0
+		#unit.hair_style = um.hair_styles[hair_style_index]
+		unit.hair_color = um.hair_colors[hair_color_index]
+		
 		unit.max_hp = 5
 		unit.hp = unit.max_hp
 		

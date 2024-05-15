@@ -7,7 +7,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70qu3"]
 atlas = ExtResource("3_8f3qg")
-region = Rect2(597, 301, 93, 209)
+region = Rect2(0, 0, 256, 256)
 
 [node name="unit" type="PanelContainer" node_paths=PackedStringArray("name_label", "select_button")]
 custom_minimum_size = Vector2(300, 0)

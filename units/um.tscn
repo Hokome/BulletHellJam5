@@ -4,3 +4,4 @@
 
 [node name="um" type="Node"]
 script = ExtResource("1_25nkn")
+hair_colors = PackedColorArray(0.221665, 0.172173, 0.115206, 1)
