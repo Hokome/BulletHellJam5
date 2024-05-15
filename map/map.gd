@@ -2,6 +2,7 @@ class_name Map extends Node2D
 
 @export var squad_texture: Texture
 
+
 const MAP_SIZE: int = 12
 @warning_ignore("integer_division")
 const HALF_MAP: int = MAP_SIZE / 2
@@ -13,6 +14,10 @@ const HALF_TILE: int = TILE_SIZE / 2
 @onready var cursor: Node2D = $cursor
 
 var fully_resolved := true
+var is_selecting_new_unit := false:
+	set(val):
+		is_selecting_new_unit = val
+		map_ui.confirm_button.visible = !val
 
 class Tile:
 	var position: Vector2i
@@ -50,25 +55,41 @@ class Tile:
 		
 		map_icon.queue_free()
 
-@onready var map_ui = $map_ui
+@onready var map_ui: MapUI = $map_ui
 
 var tiles := []
 var selected_tile: Tile:
 	set(val):
+		if is_selecting_new_unit: return
 		selected_tile = val
+		
 		map_ui.is_editing = false
 		um.selected_unit = null
 		um.selected_squad = null
-		if selected_tile != null:
+		
+		if selected_tile != null and not is_selecting_new_unit:
 			map_ui.display_squads(selected_tile.squads)
 		else:
 			map_ui.display_squads([])
 
 func _ready():
+	
 	generate_map()
 	$map_camera.translate(Vector2.ONE * TILE_SIZE * HALF_MAP)
+	var starter_tile: Tile = tiles[6][6]
+	map.selected_tile = starter_tile
+	is_selecting_new_unit = true
 	
-	um.add_squads()
+	for i in 2:
+		var starter_units: Array[UM.Unit] = [UM.Unit.create_random(), UM.Unit.create_random()]
+			
+		map_ui.display_new_units(starter_units)
+		
+		await map_ui.on_new_unit_selected
+	
+	is_selecting_new_unit = false
+	selected_tile = starter_tile
+
 
 func generate_map():
 	var tile_map: TileMap = $tiles

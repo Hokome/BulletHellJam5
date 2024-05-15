@@ -1,10 +1,17 @@
 class_name MapUI extends CanvasLayer
 
 signal confirm_button_pressed()
+signal on_new_unit_selected()
 
 @export var squad_ui_scene: PackedScene
 @export var unit_ui_scene: PackedScene
+@export var new_unit_ui_scene: PackedScene
+
 @onready var squad_list = $right/vbox/squads
+@onready var new_unit_display = $center/new_unit_display
+@onready var new_unit_list = $center/new_unit_display/margin/list
+
+@onready var confirm_button = $bottom_left/confirm_button
 @onready var edit_button = $right/vbox/edit
 @onready var new_squad_button = $right/vbox/new_squad
 
@@ -25,6 +32,26 @@ func _ready():
 	$bottom_left/confirm_button.pressed.connect(emit_signal.bind(confirm_button_pressed.get_name()))
 
 func toggle_edit(): is_editing = !is_editing
+
+func display_new_units(units: Array[UM.Unit]):
+	for u in units:
+		var unit_ui: UnitUI = new_unit_ui_scene.instantiate()
+		new_unit_list.add_child(unit_ui)
+		unit_ui.assign_unit(u)
+		
+		unit_ui.select_button.pressed.connect(new_unit_selected.bind(u))
+	new_unit_display.visible = true
+
+func new_unit_selected(unit: UM.Unit):
+	var squad: UM.Squad = um.create_squad()
+	squad.add_unit(unit)
+	map.selected_tile.add_squad(squad)
+	
+	for c in new_unit_list.get_children():
+		c.queue_free()
+	new_unit_display.visible = false
+	
+	on_new_unit_selected.emit()
 
 func display_squads(squads: Array):
 	elem_dictionary.clear()

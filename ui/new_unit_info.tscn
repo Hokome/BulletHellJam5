@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjgt6o7osy4s"]
+
+[ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_hpeeg"]
+[ext_resource type="Script" path="res://ui/unit_ui.gd" id="2_ln28w"]
+[ext_resource type="Texture2D" uid="uid://dtuhcjag2ck76" path="res://units/ally/unit.png" id="3_8f3qg"]
+[ext_resource type="Theme" uid="uid://jlx340yoo0en" path="res://ui/over_button.tres" id="4_at4av"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70qu3"]
+atlas = ExtResource("3_8f3qg")
+region = Rect2(597, 301, 93, 209)
+
+[node name="unit" type="PanelContainer" node_paths=PackedStringArray("name_label", "select_button")]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hpeeg")
+script = ExtResource("2_ln28w")
+name_label = NodePath("margin/vbox/name")
+select_button = NodePath("select")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="vbox" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+
+[node name="character_margin" type="MarginContainer" parent="margin/vbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="character" type="TextureRect" parent="margin/vbox/character_margin"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_70qu3")
+expand_mode = 5
+
+[node name="name" type="Label" parent="margin/vbox"]
+layout_mode = 2
+text = "John"
+horizontal_alignment = 1
+
+[node name="select" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("4_at4av")

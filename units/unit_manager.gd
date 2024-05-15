@@ -34,6 +34,40 @@ class Squad extends RefCounted:
 		if units.is_empty():
 			marked_delete = true
 
+const UNIT_NAMES = [
+	"John",
+	"Bob",
+	"Kevin",
+	"Lito",
+	"Hugo",
+	"Hans",
+	"William",
+	"Albert",
+	"Cyril",
+	"Charles",
+	"Vincent",
+	"Leo",
+	"Juan",
+	"Julian",
+	"Milo",
+]
+const FEMININE_NAMES = [
+	"Maria",
+	"Karen",
+	"Emily",
+	"Laura",
+	"Elise",
+	"Sarah",
+	"Angela",
+	"Cecile",
+	"Claire",
+	"Lucie",
+	"Rebecca",
+	"Robin",
+	"Daniela",
+	"Luana",
+]
+
 class Unit extends RefCounted:
 	var name: String
 	var hp: int
@@ -44,6 +78,14 @@ class Unit extends RefCounted:
 	
 	func remove_from_squad():
 		squad.remove_unit(self)
+	
+	static func create_random() -> Unit:
+		var unit := Unit.new()
+		unit.name = FEMININE_NAMES.pick_random()
+		unit.max_hp = 5
+		unit.hp = unit.max_hp
+		
+		return unit
 
 func create_squad() -> Squad:
 	var squad: Squad = Squad.new()

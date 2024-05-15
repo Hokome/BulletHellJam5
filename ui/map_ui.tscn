@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://b61xruy22uyf5"]
+[gd_scene load_steps=6 format=3 uid="uid://b61xruy22uyf5"]
 
 [ext_resource type="Script" path="res://ui/map_ui.gd" id="1_1u08b"]
 [ext_resource type="PackedScene" uid="uid://ib0wxl0njjfc" path="res://ui/squad_info.tscn" id="2_g75j8"]
 [ext_resource type="PackedScene" uid="uid://dj6bg2xfnf5kl" path="res://ui/unit_info.tscn" id="3_pwmu5"]
+[ext_resource type="PackedScene" uid="uid://cjgt6o7osy4s" path="res://ui/new_unit_info.tscn" id="4_sxqyd"]
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="4_xgdp5"]
 
 [node name="map_ui" type="CanvasLayer"]
 script = ExtResource("1_1u08b")
 squad_ui_scene = ExtResource("2_g75j8")
 unit_ui_scene = ExtResource("3_pwmu5")
+new_unit_ui_scene = ExtResource("4_sxqyd")
 
 [node name="right" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(100, 0)
@@ -61,5 +63,27 @@ custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme = ExtResource("4_xgdp5")
 text = "Go!"
+
+[node name="center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="new_unit_display" type="PanelContainer" parent="center"]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="center/new_unit_display"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="list" type="HBoxContainer" parent="center/new_unit_display/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [connection signal="pressed" from="right/vbox/new_squad" to="." method="_on_new_squad_pressed"]

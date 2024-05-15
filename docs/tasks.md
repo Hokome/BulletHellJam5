@@ -19,8 +19,8 @@
 - [x] Squad movement
 - [x] Confirm button
 - [ ] Squad locked indicator
-- [ ] Move units to other squads
-- [ ] Make new squad
+- [x] Move units to other squads
+- [x] Make new squad
 - [ ] Get new units
 
 ## Sketch
