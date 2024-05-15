@@ -23,6 +23,8 @@ class Tile:
 	
 	func reset():
 		resolved = false
+	
+	func cleanup_squads():
 		for s in squads:
 			s.pos_locked = false
 			for u in s.units:
@@ -116,13 +118,6 @@ func _unhandled_input(event):
 				var destination_tile = tiles[select_pos.x][select_pos.y]
 				move_squad(um.selected_squad, selected_tile, destination_tile)
 
-func _on_end_pressed():
-	fully_resolved = false
-	visible = false
-	map_ui.visible = false
-	$map_camera.enabled = false
-	battle_end_callback()
-
 func battle_end_callback():
 	if fully_resolved: return
 	if battle.on_going: return
@@ -132,6 +127,7 @@ func battle_end_callback():
 			if ty.resolved: continue
 			if !ty.squads.is_empty():
 				ty.resolved = true
+				ty.cleanup_squads()
 				battle.start_battle.call_deferred(ty.squads)
 				return
 			ty.resolved = true
@@ -145,3 +141,11 @@ func battle_end_callback():
 	$map_camera.enabled = true
 	selected_tile = null
 	fully_resolved = true
+
+
+func _on_confirm_pressed():
+	fully_resolved = false
+	visible = false
+	map_ui.visible = false
+	$map_camera.enabled = false
+	battle_end_callback()

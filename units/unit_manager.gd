@@ -30,6 +30,8 @@ class Squad extends RefCounted:
 	func remove_unit(unit: Unit):
 		unit.squad = null
 		units.erase(unit)
+		if units.is_empty():
+			marked_delete = true
 
 class Unit extends RefCounted:
 	var name: String

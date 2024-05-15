@@ -1,5 +1,7 @@
 class_name MapUI extends CanvasLayer
 
+signal confirm_button_pressed()
+
 @export var squad_ui_scene: PackedScene
 @export var unit_ui_scene: PackedScene
 @onready var squad_list = $right/vbox/squads
@@ -17,6 +19,7 @@ var is_editing := false:
 func _ready():
 	display_squads([])
 	edit_button.pressed.connect(toggle_edit)
+	$bottom_left/confirm_button.pressed.connect(emit_signal.bind(confirm_button_pressed.get_name()))
 
 func toggle_edit(): is_editing = !is_editing
 
@@ -28,6 +31,8 @@ func display_squads(squads: Array):
 		c.queue_free()
 	
 	for squad_info: UM.Squad in squads:
+		if squad_info.marked_delete or squad_info.units.is_empty(): continue
+		
 		var squad_ui: SquadUI = squad_ui_scene.instantiate()
 		squad_list.add_child(squad_ui)
 		squad_ui.name_label.text = squad_info.name
@@ -57,6 +62,7 @@ func move_to_squad(squad: UM.Squad):
 	if squad == null: return
 	if um.selected_unit == null: return
 	
+	var old_squad = um.selected_unit.squad
 	um.selected_unit.remove_from_squad()
 	squad.add_unit(um.selected_unit)
 	
@@ -65,3 +71,6 @@ func move_to_squad(squad: UM.Squad):
 	
 	unit_ui.reparent(squad_ui.unit_list)
 	squad_ui.sort_children()
+	
+	if old_squad.marked_delete:
+		elem_dictionary[old_squad].queue_free()
