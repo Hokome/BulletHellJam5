@@ -1,14 +1,55 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://dtflyc0m6vvld"]
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dtflyc0m6vvld"]
 
 [ext_resource type="Texture2D" uid="uid://n805cvcuaeqt" path="res://units/ally/hair/hair_goku.png" id="1_7q6ck"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3rp1"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntc0t"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03x21"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(512, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mygn7"]
 atlas = ExtResource("1_7q6ck")
 region = Rect2(0, 0, 256, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7g3x"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acb28"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_garfg"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of0x7"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frv3a"]
+atlas = ExtResource("1_7q6ck")
+region = Rect2(1024, 256, 256, 256)
+
 [resource]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3rp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntc0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03x21")
+}],
 "loop": true,
 "name": &"attack",
 "speed": 5.0
@@ -21,7 +62,22 @@ animations = [{
 "name": &"idle",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7g3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acb28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_garfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of0x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frv3a")
+}],
 "loop": true,
 "name": &"run",
 "speed": 5.0

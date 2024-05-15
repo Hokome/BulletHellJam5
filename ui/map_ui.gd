@@ -43,9 +43,14 @@ func display_new_units(units: Array[UM.Unit]):
 	new_unit_display.visible = true
 
 func new_unit_selected(unit: UM.Unit):
-	var squad: UM.Squad = um.create_squad()
+	var squad: UM.Squad
+	if map.selected_tile.squads.is_empty():
+		squad = um.create_squad()
+		map.selected_tile.add_squad(squad)
+	else:
+		squad = map.selected_tile.squads[0]
+	
 	squad.add_unit(unit)
-	map.selected_tile.add_squad(squad)
 	
 	for c in new_unit_list.get_children():
 		c.queue_free()

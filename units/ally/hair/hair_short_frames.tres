@@ -1,11 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://b7xbm3hpw8ffq"]
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://b7xbm3hpw8ffq"]
 
-[ext_resource type="Texture2D" uid="uid://n805cvcuaeqt" path="res://units/ally/hair/hair_goku.png" id="1_i6y78"]
 [ext_resource type="Texture2D" uid="uid://bgunenu2ctmqm" path="res://units/ally/hair/hair_short.png" id="2_pskhb"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mygn7"]
-atlas = ExtResource("1_i6y78")
-region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nnao"]
 atlas = ExtResource("2_pskhb")
@@ -19,9 +14,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mygn7")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0nnao")
 }],

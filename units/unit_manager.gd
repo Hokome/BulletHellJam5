@@ -199,7 +199,11 @@ func create_random_unit() -> Unit:
 		else:
 			unit.name = FEMININE_NAMES.pick_random()
 		
-		var hair_style_index = randi_range(0, hair_styles.size() - 1)
+		@warning_ignore("integer_division")
+		var half_style_count := hair_styles.size() / 2
+		var hair_style_index = randi_range(0, half_style_count - 1)
+		if !is_male:
+			hair_style_index += half_style_count
 		var hair_color_index = randi_range(0, hair_colors.size() -1)
 		unit.hair_style = hair_styles[hair_style_index]
 		unit.hair_color = hair_colors[hair_color_index]

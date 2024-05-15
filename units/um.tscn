@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dotqievq6vu1x"]
+[gd_scene load_steps=10 format=3 uid="uid://dotqievq6vu1x"]
 
 [ext_resource type="Script" path="res://units/unit_manager.gd" id="1_25nkn"]
+[ext_resource type="SpriteFrames" uid="uid://ck6e42ty40155" path="res://units/ally/hair/hair_bun_frames.tres" id="2_j55gw"]
 [ext_resource type="SpriteFrames" uid="uid://dtflyc0m6vvld" path="res://units/ally/hair/hair_goku_frames.tres" id="2_r0y83"]
+[ext_resource type="SpriteFrames" uid="uid://oydw173sjksv" path="res://units/ally/hair/hair_chiyo_frames.tres" id="3_3eg4u"]
 [ext_resource type="SpriteFrames" uid="uid://b7xbm3hpw8ffq" path="res://units/ally/hair/hair_short_frames.tres" id="3_06wpg"]
+[ext_resource type="SpriteFrames" uid="uid://datk3r27t22pa" path="res://units/ally/hair/hair_hear_frames.tres" id="5_fvytr"]
+[ext_resource type="SpriteFrames" uid="uid://qi4dwqe0xgk6" path="res://units/ally/hair/hair_ponytail_frames.tres" id="6_i7s8e"]
+[ext_resource type="SpriteFrames" uid="uid://dh45pbxco4j7g" path="res://units/ally/hair/hair_shorter_frames.tres" id="8_adyky"]
+[ext_resource type="SpriteFrames" uid="uid://dsl2g2dnp8p6h" path="res://units/ally/hair/hair_tatsu_frames.tres" id="9_lais1"]
 
 [node name="um" type="Node"]
 script = ExtResource("1_25nkn")
-hair_colors = PackedColorArray(0.221665, 0.172173, 0.115206, 1, 0.764758, 0.675246, 0.482968, 1, 0.167356, 0.167356, 0.167356, 1, 0.615407, 0.615407, 0.615407, 1)
-hair_styles = Array[SpriteFrames]([ExtResource("2_r0y83"), ExtResource("3_06wpg")])
+hair_colors = PackedColorArray(0.221665, 0.172173, 0.115206, 1, 0.601972, 0.473152, 0.289132, 1, 0.167356, 0.167356, 0.167356, 1, 1, 0.870152, 0.440811, 1, 0.764758, 0.513109, 0.327055, 1, 0.615407, 0.615407, 0.615407, 1, 0.506789, 0.116745, 0.116745, 1, 0.495829, 0.758184, 0.785124, 1, 0.278703, 0.159182, 0.350649, 1, 0.839433, 0.541168, 0.800729, 1, 0.58744, 0.832644, 0.542268, 1, 0.253288, 0.307369, 0.5, 1)
+hair_styles = Array[SpriteFrames]([ExtResource("2_r0y83"), ExtResource("8_adyky"), ExtResource("5_fvytr"), ExtResource("3_06wpg"), ExtResource("2_j55gw"), ExtResource("3_3eg4u"), ExtResource("6_i7s8e"), ExtResource("9_lais1")])

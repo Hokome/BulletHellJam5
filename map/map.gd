@@ -73,15 +73,14 @@ var selected_tile: Tile:
 			map_ui.display_squads([])
 
 func _ready():
-	
 	generate_map()
 	$map_camera.translate(Vector2.ONE * TILE_SIZE * HALF_MAP)
 	var starter_tile: Tile = tiles[6][6]
 	map.selected_tile = starter_tile
 	is_selecting_new_unit = true
 	
-	for i in 2:
-		var starter_units: Array[UM.Unit] = [um.create_random_unit(), um.create_random_unit()]
+	for i in 3:
+		var starter_units: Array[UM.Unit] = [um.create_random_unit(), um.create_random_unit(), um.create_random_unit()]
 			
 		map_ui.display_new_units(starter_units)
 		

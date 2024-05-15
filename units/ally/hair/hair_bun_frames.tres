@@ -1,0 +1,28 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://ck6e42ty40155"]
+
+[ext_resource type="Texture2D" uid="uid://b5fjh618wucfs" path="res://units/ally/hair/hair_bun.png" id="1_08ml7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkpfa"]
+atlas = ExtResource("1_08ml7")
+region = Rect2(0, 0, 256, 256)
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkpfa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
