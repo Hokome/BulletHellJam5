@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctn35r33n8khl"]
 
-[ext_resource type="Script" path="res://units/ally/unit.gd" id="1_nohcy"]
+[ext_resource type="Script" path="res://units/ally/unit_controller.gd" id="1_jrvp2"]
 [ext_resource type="Script" path="res://units/health.gd" id="2_ogbsk"]
 [ext_resource type="PackedScene" uid="uid://d2k6onwm0ddy8" path="res://attacks/ally_fireball.tscn" id="2_wv6pl"]
 [ext_resource type="SpriteFrames" uid="uid://cjfujb72qqmkf" path="res://units/ally/unit_frames.tres" id="3_bkyh2"]
@@ -17,7 +17,7 @@ radius = 500.0
 
 [node name="unit_controller" type="CharacterBody2D"]
 motion_mode = 1
-script = ExtResource("1_nohcy")
+script = ExtResource("1_jrvp2")
 speed = 200.0
 attack_cooldown = 0.5
 projectile_scene = ExtResource("2_wv6pl")

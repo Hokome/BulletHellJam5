@@ -5,6 +5,8 @@ class_name MapUI extends CanvasLayer
 @onready var squad_list = $right/vbox/squads
 @onready var edit_button = $right/vbox/edit
 
+var elem_dictionary: Dictionary = {}
+
 var is_editing := false:
 	set(val):
 		is_editing = val
@@ -19,6 +21,7 @@ func _ready():
 func toggle_edit(): is_editing = !is_editing
 
 func display_squads(squads: Array):
+	elem_dictionary.clear()
 	edit_button.visible = !squads.is_empty()
 	
 	for c in squad_list.get_children():
@@ -28,14 +31,37 @@ func display_squads(squads: Array):
 		var squad_ui: SquadUI = squad_ui_scene.instantiate()
 		squad_list.add_child(squad_ui)
 		squad_ui.name_label.text = squad_info.name
+		squad_ui.empty_spot_button.pressed.connect(move_to_squad.bind(squad_info))
+		elem_dictionary[squad_info] = squad_ui
 		
 		for unit_info in squad_info.units:
 			var unit_ui: UnitUI = unit_ui_scene.instantiate()
 			squad_ui.unit_list.add_child(unit_ui)
-			unit_ui.name_label.text = unit_info.name
-			unit_ui.hp_bar.max_value = unit_info.max_hp
-			unit_ui.hp_bar.value = unit_info.hp
+			
+			unit_ui.assign_unit(unit_info)
+			
+			unit_ui.select_button.pressed.connect(unit_clicked.bind(unit_info))
+			elem_dictionary[unit_info] = unit_ui
 		
 		squad_ui.sort_children()
 		
 		squad_ui.select_button.pressed.connect(um.select_squad.bind(squad_info.id))
+
+func unit_clicked(unit: UM.Unit):
+	if !is_editing: return
+	
+	um.selected_unit = unit
+
+func move_to_squad(squad: UM.Squad):
+	if !is_editing: return
+	if squad == null: return
+	if um.selected_unit == null: return
+	
+	um.selected_unit.remove_from_squad()
+	squad.add_unit(um.selected_unit)
+	
+	var unit_ui = elem_dictionary[um.selected_unit]
+	var squad_ui = elem_dictionary[squad]
+	
+	unit_ui.reparent(squad_ui.unit_list)
+	squad_ui.sort_children()

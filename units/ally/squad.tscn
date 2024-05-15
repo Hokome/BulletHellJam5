@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3rnrx8rsva0w"]
 
-[ext_resource type="Script" path="res://units/ally/squad.gd" id="1_wn47c"]
+[ext_resource type="Script" path="res://units/ally/squad_controller.gd" id="1_wn47c"]
 [ext_resource type="PackedScene" uid="uid://ctn35r33n8khl" path="res://units/ally/unit.tscn" id="2_xum4u"]
 [ext_resource type="Texture2D" uid="uid://bbfy8swps1aic" path="res://units/ally/unit_anchor.png" id="3_h4m6n"]
 

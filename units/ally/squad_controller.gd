@@ -14,6 +14,8 @@ var units: Array[UnitController] = []
 const UNIT_POS: Array[Vector2] = [
 	Vector2(100, 0),
 	Vector2(-100, 0),
+	Vector2(0, 100),
+	Vector2(0, -100),
 ]
 
 func create_unit(unit_info: UM.Unit):

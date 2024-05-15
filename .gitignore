@@ -2,5 +2,6 @@
 .godot/
 
 .vs/
+.vscode/
 *.kra~
 *.png~

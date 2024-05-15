@@ -22,12 +22,25 @@ class Squad extends RefCounted:
 	var name: String
 	var pos_locked := false
 	var marked_delete := false
+	
+	func add_unit(unit: Unit):
+		unit.squad = self
+		units.append(unit)
+	
+	func remove_unit(unit: Unit):
+		unit.squad = null
+		units.erase(unit)
 
 class Unit extends RefCounted:
 	var name: String
 	var hp: int
 	var max_hp: int
+	var squad: Squad
+	
 	var marked_delete := false
+	
+	func remove_from_squad():
+		squad.remove_unit(self)
 
 func create_squad() -> Squad:
 	var squad: Squad = Squad.new()
@@ -53,4 +66,4 @@ func add_unit(squad: Squad, unit_name: String):
 	unit.name = unit_name
 	unit.max_hp = 5
 	unit.hp = unit.max_hp
-	squad.units.append(unit)
+	squad.add_unit(unit)
