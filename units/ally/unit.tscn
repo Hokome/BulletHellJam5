@@ -32,6 +32,8 @@ sprite_frames = ExtResource("3_bkyh2")
 animation = &"run"
 frame_progress = 0.254612
 
+[node name="hair" type="AnimatedSprite2D" parent="sprite"]
+
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_j47w0")
 
