@@ -29,7 +29,7 @@ max_value = 50
 
 [node name="animated_sprite_2d" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("5_yyvre")
-animation = &"idle"
+animation = &"death"
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_jaleb")
