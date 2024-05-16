@@ -4,6 +4,11 @@ enum Faction {Neutral, Ally, Enemy}
 
 var on_going := false
 
+const ENEMY_POS: Array[Vector2] = [
+	Vector2(-400, -200),
+	Vector2(400, -200),
+]
+
 const STARTING_POS: Array[Vector2] = [
 	Vector2(0, 0),
 	Vector2(400, 0),
@@ -16,7 +21,9 @@ const STARTING_POS: Array[Vector2] = [
 
 var squads_info: Array[UM.Squad]
 var squad_list: Array[SquadController] = []
+var unit_list: Array[UnitController] = []
 var enemy_list: Array[Node2D] = []
+
 
 func _ready():
 	visible = false
@@ -28,12 +35,16 @@ func start_battle(squads: Array[UM.Squad]):
 	
 	squads_info = squads
 	squad_list.clear()
+	unit_list.clear()
 	visible = true
 	
 	await get_tree().process_frame
 	
 	add_decor()
-	add_enemy(Vector2(0, -200))
+	
+	for p in ENEMY_POS:
+		add_enemy(p)
+	
 	add_child(player_scene.instantiate())
 	for i in squads.size():
 		add_squad(squads[i], STARTING_POS[i])

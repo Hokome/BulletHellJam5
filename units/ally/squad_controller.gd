@@ -31,6 +31,7 @@ func create_unit(unit_info: UM.Unit):
 	unit.import_unit(unit_info)
 	
 	units.append(unit)
+	battle.unit_list.append(unit)
 	
 	unit.squad = self
 	unit.get_node("health").on_death.connect(on_unit_died.bind(unit))

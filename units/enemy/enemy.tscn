@@ -10,9 +10,9 @@
 [sub_resource type="Resource" id="Resource_pqhk1"]
 script = ExtResource("3_v8s31")
 projectile_scene = ExtResource("2_r3ey5")
-projectile_count = 32
-total_angle = 360.0
-spacing = 0.5
+projectile_count = 8
+total_angle = 60.0
+spacing = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqobl"]
 radius = 128.0
