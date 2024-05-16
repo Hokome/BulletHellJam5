@@ -183,7 +183,7 @@ class Unit extends RefCounted:
 		create_stat(StatType.Support, StatIntensity.None)
 		
 		while budget: 
-			var stat = randi_range(1, 4)
+			var stat = randi_range(1, 3)
 			if increment_stat(stat): budget -= 1
 		
 		for stat in stats.values():

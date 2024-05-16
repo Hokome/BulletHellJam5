@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dog125hlohoyk"]
+
+[ext_resource type="Script" path="res://ui/unit_stat_ui.gd" id="1_wo410"]
+[ext_resource type="PackedScene" uid="uid://dx3edirvc6ofa" path="res://ui/stat_ui.tscn" id="2_ne3im"]
+
+[node name="unit_stat_ui" type="PanelContainer" node_paths=PackedStringArray("stat_list")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wo410")
+stat_scene = ExtResource("2_ne3im")
+stat_list = NodePath("margin/list")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="list" type="VBoxContainer" parent="margin"]
+layout_mode = 2

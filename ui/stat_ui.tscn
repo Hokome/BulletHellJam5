@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx3edirvc6ofa"]
+
+[ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_43vt5"]
+
+[node name="stat_ui" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="type" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_43vt5")
+text = "Vitality: "
+
+[node name="intensity" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_43vt5")
+text = "High"
+horizontal_alignment = 2
