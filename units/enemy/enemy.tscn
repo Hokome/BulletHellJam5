@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjlj67eo7ah71"]
+[gd_scene load_steps=10 format=3 uid="uid://bjlj67eo7ah71"]
 
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_trqow"]
 [ext_resource type="PackedScene" uid="uid://brpqbltmcyray" path="res://attacks/projectile.tscn" id="2_r3ey5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhtswylyy7104" path="res://units/enemy/enemy.png" id="4_jaleb"]
 [ext_resource type="Script" path="res://units/health.gd" id="4_ssyq8"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="5_csdaw"]
+[ext_resource type="SpriteFrames" uid="uid://dbau68t0tjob3" path="res://units/enemy/enemy_oni_frames.tres" id="5_yyvre"]
 
 [sub_resource type="Resource" id="Resource_pqhk1"]
 script = ExtResource("3_v8s31")
@@ -25,6 +26,10 @@ cooldown = 10.0
 [node name="health" type="Node2D" parent="."]
 script = ExtResource("4_ssyq8")
 max_value = 50
+
+[node name="animated_sprite_2d" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("5_yyvre")
+animation = &"idle"
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_jaleb")
