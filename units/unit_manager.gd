@@ -188,8 +188,6 @@ class Unit extends RefCounted:
 		
 		for stat in stats.values():
 			stat.generate_precise()
-		
-		print(stats)
 
 func create_random_unit() -> Unit:
 		var unit := Unit.new()

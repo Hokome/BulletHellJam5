@@ -13,7 +13,7 @@ size = Vector2(64, 128)
 size = Vector2(32, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qa1u3"]
-radius = 500.0
+radius = 600.0
 
 [node name="unit_controller" type="CharacterBody2D"]
 motion_mode = 1
