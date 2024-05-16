@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://6gaokn2s2igo"]
+
+[ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="1_l8tmq"]
+[ext_resource type="Script" path="res://ui/unit_stat_ui.gd" id="1_mewac"]
+[ext_resource type="PackedScene" uid="uid://dx3edirvc6ofa" path="res://ui/stat_ui.tscn" id="2_dst3v"]
+
+[node name="stat_tooltip" type="PanelContainer" node_paths=PackedStringArray("stat_list")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l8tmq")
+script = ExtResource("1_mewac")
+stat_scene = ExtResource("2_dst3v")
+stat_list = NodePath("margin/list")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="list" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+size_flags_vertical = 0

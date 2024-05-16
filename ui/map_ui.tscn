@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b61xruy22uyf5"]
+[gd_scene load_steps=7 format=3 uid="uid://b61xruy22uyf5"]
 
 [ext_resource type="Script" path="res://ui/map_ui.gd" id="1_1u08b"]
 [ext_resource type="PackedScene" uid="uid://ib0wxl0njjfc" path="res://ui/squad_info.tscn" id="2_g75j8"]
 [ext_resource type="PackedScene" uid="uid://dj6bg2xfnf5kl" path="res://ui/unit_info.tscn" id="3_pwmu5"]
 [ext_resource type="PackedScene" uid="uid://cjgt6o7osy4s" path="res://ui/new_unit_info.tscn" id="4_sxqyd"]
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="4_xgdp5"]
+[ext_resource type="PackedScene" uid="uid://6gaokn2s2igo" path="res://ui/unit_stat_tooltip.tscn" id="6_yxsls"]
 
 [node name="map_ui" type="CanvasLayer"]
 script = ExtResource("1_1u08b")
@@ -85,5 +86,9 @@ theme_override_constants/margin_bottom = 10
 [node name="list" type="HBoxContainer" parent="center/new_unit_display/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
+
+[node name="stat_tooltip" parent="." instance=ExtResource("6_yxsls")]
+visible = false
+custom_minimum_size = Vector2(400, 0)
 
 [connection signal="pressed" from="right/vbox/new_squad" to="." method="_on_new_squad_pressed"]

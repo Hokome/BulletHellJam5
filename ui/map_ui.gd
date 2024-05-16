@@ -15,6 +15,8 @@ signal on_new_unit_selected()
 @onready var edit_button = $right/vbox/edit
 @onready var new_squad_button = $right/vbox/new_squad
 
+@onready var stat_tooltip: UnitStatUI = $stat_tooltip
+
 var elem_dictionary: Dictionary = {}
 
 var is_editing := false:
@@ -81,6 +83,8 @@ func display_squads(squads: Array):
 			unit_ui.assign_unit(unit_info)
 			
 			unit_ui.select_button.pressed.connect(unit_clicked.bind(unit_info))
+			unit_ui.select_button.mouse_entered.connect(unit_mouse_enter.bind(unit_info, unit_ui))
+			unit_ui.select_button.mouse_exited.connect(unit_mouse_exit.bind(unit_info, unit_ui))
 			elem_dictionary[unit_info] = unit_ui
 		
 		squad_ui.sort_children()
@@ -105,6 +109,20 @@ func unit_clicked(unit: UM.Unit):
 	if !is_editing: return
 	
 	um.selected_unit = unit
+
+var hovered_unit_ui: UnitUI
+
+func unit_mouse_enter(unit: UM.Unit, ui: UnitUI):
+	stat_tooltip.visible = true
+	stat_tooltip.display_stats(unit)
+	stat_tooltip.global_position = ui.global_position
+	stat_tooltip.global_position += Vector2.LEFT * (stat_tooltip.size.x + 20)
+	hovered_unit_ui = ui
+
+func unit_mouse_exit(unit: UM.Unit, ui: UnitUI):
+	if hovered_unit_ui != ui: return
+	stat_tooltip.visible = false
+	hovered_unit_ui = null
 
 func move_to_squad(squad: UM.Squad):
 	if !is_editing: return
