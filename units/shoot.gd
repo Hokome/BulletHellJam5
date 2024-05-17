@@ -9,7 +9,6 @@ func before_run(actor: Node, blackboard: Blackboard):
 	started_shooting = false
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	print("shoot")
 	if !started_shooting:
 		shoot_async(actor)
 	if !is_shooting: return SUCCESS

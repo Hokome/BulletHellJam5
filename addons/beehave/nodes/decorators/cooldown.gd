@@ -23,8 +23,8 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	
 	if remaining_time > 0:
 		response = FAILURE
-		
-		remaining_time -= get_physics_process_delta_time()
+		if !time_manager.paused:
+			remaining_time -= get_physics_process_delta_time()
 		blackboard.set_value(cache_key, remaining_time, str(actor.get_instance_id()))
 		
 		if can_send_message(blackboard):
