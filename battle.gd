@@ -17,20 +17,20 @@ const STARTING_POS: Array[Vector2] = [
 
 @export var player_scene: PackedScene
 @export var squad_scene: PackedScene
-@export var enemy_scene: PackedScene
+
+@export var oni_scene: PackedScene
 
 var squads_info: Array[UM.Squad]
 var squad_list: Array[SquadController] = []
 var unit_list: Array[UnitController] = []
 var enemy_list: Array[Node2D] = []
 
-
 func _ready():
 	visible = false
 	add_child(player_scene.instantiate())
 	player().enabled = false
 
-func start_battle(squads: Array[UM.Squad]):
+func start_battle(squads: Array[UM.Squad], difficulty: int):
 	on_going = true
 	
 	squads_info = squads
@@ -41,13 +41,28 @@ func start_battle(squads: Array[UM.Squad]):
 	await get_tree().process_frame
 	
 	add_decor()
-	
-	for p in ENEMY_POS:
-		add_enemy(p)
+	create_enemies(difficulty)
 	
 	add_child(player_scene.instantiate())
 	for i in squads.size():
 		add_squad(squads[i], STARTING_POS[i])
+
+func create_enemies(difficulty: int):
+	if difficulty > 50:
+		#BOSS
+		return
+	while difficulty > 0:
+		var pos: Vector2
+		while pos.length() < 500:
+			pos = get_enemy_pos()
+		
+		add_enemy(oni_scene, pos)
+		difficulty -= 1
+
+func get_enemy_pos() -> Vector2:
+	const bound_x := 1000
+	const bound_y := 800
+	return Vector2(randf_range(-bound_x, bound_x), randf_range(-bound_y, bound_y))
 
 func add_squad(squad_info: UM.Squad, pos: Vector2):
 	var squad: SquadController = squad_scene.instantiate()
@@ -57,7 +72,7 @@ func add_squad(squad_info: UM.Squad, pos: Vector2):
 	for unit in squad_info.units:
 		squad.create_unit(unit)
 	
-func add_enemy(pos):
+func add_enemy(enemy_scene: PackedScene, pos: Vector2):
 	var new_enemy = enemy_scene.instantiate()
 	add_child(new_enemy)
 	new_enemy.position = pos

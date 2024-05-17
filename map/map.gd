@@ -3,9 +3,9 @@ class_name Map extends Node2D
 @export var squad_texture: Texture
 
 
-const MAP_SIZE: int = 12
+const MAP_SIZE: Vector2i = Vector2i(6, 4)
 @warning_ignore("integer_division")
-const HALF_MAP: int = MAP_SIZE / 2
+const HALF_MAP: Vector2i = MAP_SIZE / 2
 
 const TILE_SIZE: int = 512
 @warning_ignore("integer_division")
@@ -76,10 +76,15 @@ var selected_tile: Tile:
 		else:
 			map_ui.display_squads([])
 
+func get_tile(pos: Vector2i) -> Tile:
+	if pos.x < 0 or pos.y < 0: return null
+	if pos.x >= MAP_SIZE.x or pos.y >= MAP_SIZE.y: return null
+	return tiles[pos.x][pos.y]
+
 func _ready():
 	generate_map()
-	$map_camera.translate(Vector2.ONE * TILE_SIZE * HALF_MAP)
-	var starter_tile: Tile = tiles[6][6]
+	$map_camera.translate(TILE_SIZE * HALF_MAP)
+	var starter_tile: Tile = get_tile(Vector2(1, 2))
 	map.selected_tile = starter_tile
 	is_selecting_new_unit = true
 	
@@ -96,9 +101,9 @@ func _ready():
 
 func generate_map():
 	var tile_map: TileMap = $tiles
-	for x in MAP_SIZE:
+	for x in MAP_SIZE.x:
 		tiles.append([])
-		for y in MAP_SIZE:
+		for y in MAP_SIZE.y:
 			var tile = Tile.new()
 			tile.type = 0
 			tile.position = Vector2i(x, y)
@@ -106,6 +111,7 @@ func generate_map():
 			tiles[x].append(tile)
 
 func move_squad(squad: UM.Squad, from: Tile, to: Tile):
+	if to == null: return
 	var diff := to.position - from.position
 	var length = (diff as Vector2).length_squared()
 	if length > 1 or length == 0: return
@@ -135,11 +141,11 @@ func _unhandled_input(event):
 		if !event.is_pressed(): return
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var select_pos := get_cursor_grid()
-			selected_tile = tiles[select_pos.x][select_pos.y]
+			selected_tile = get_tile(select_pos)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if selected_tile != null and um.selected_squad != null:
 				var select_pos := get_cursor_grid()
-				var destination_tile = tiles[select_pos.x][select_pos.y]
+				var destination_tile = get_tile(select_pos)
 				move_squad(um.selected_squad, selected_tile, destination_tile)
 
 func battle_end_callback():
@@ -152,7 +158,7 @@ func battle_end_callback():
 			if !ty.squads.is_empty():
 				ty.resolved = true
 				ty.cleanup_squads()
-				battle.start_battle.call_deferred(ty.squads)
+				battle.start_battle.call_deferred(ty.squads, (ty.position.x) * 2)
 				return
 			ty.resolved = true
 	
