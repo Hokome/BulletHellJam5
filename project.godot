@@ -23,6 +23,7 @@ debugger="*res://debug/debugger.tscn"
 battle="*res://battle.tscn"
 map="*res://map/map.tscn"
 um="*res://units/um.tscn"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 
 [display]
 

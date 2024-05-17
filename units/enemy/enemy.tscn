@@ -1,17 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjlj67eo7ah71"]
+[gd_scene load_steps=13 format=3 uid="uid://bjlj67eo7ah71"]
 
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_trqow"]
 [ext_resource type="PackedScene" uid="uid://brpqbltmcyray" path="res://attacks/projectile.tscn" id="2_r3ey5"]
 [ext_resource type="Script" path="res://attacks/projectile_pattern.gd" id="3_v8s31"]
-[ext_resource type="Texture2D" uid="uid://bhtswylyy7104" path="res://units/enemy/enemy.png" id="4_jaleb"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_kqbgk"]
 [ext_resource type="Script" path="res://units/health.gd" id="4_ssyq8"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="5_0tapf"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="5_csdaw"]
-[ext_resource type="SpriteFrames" uid="uid://dbau68t0tjob3" path="res://units/enemy/enemy_oni_frames.tres" id="5_yyvre"]
+[ext_resource type="SpriteFrames" uid="uid://8h4sbcws6xtk" path="res://units/enemy/enemy_oni_frames.tres" id="5_yyvre"]
+[ext_resource type="Script" path="res://units/go_to_random.gd" id="6_hyt51"]
+[ext_resource type="Script" path="res://units/shoot.gd" id="7_essjv"]
 
-[sub_resource type="Resource" id="Resource_pqhk1"]
+[sub_resource type="Resource" id="Resource_6a3tq"]
 script = ExtResource("3_v8s31")
 projectile_scene = ExtResource("2_r3ey5")
-projectile_count = 8
+projectile_count = 16
 total_angle = 60.0
 spacing = 0.0
 
@@ -20,8 +23,24 @@ radius = 128.0
 
 [node name="enemy" type="Node2D"]
 script = ExtResource("1_trqow")
-pattern = SubResource("Resource_pqhk1")
-cooldown = 10.0
+speed = 50.0
+
+[node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("4_kqbgk")
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@17474")
+actor = NodePath("..")
+
+[node name="sequence" type="Node" parent="tree"]
+script = ExtResource("5_0tapf")
+
+[node name="shoot" type="Node" parent="tree/sequence"]
+script = ExtResource("7_essjv")
+pattern = SubResource("Resource_6a3tq")
+
+[node name="move" type="Node" parent="tree/sequence"]
+script = ExtResource("6_hyt51")
+selection_range = Vector2(800, 600)
 
 [node name="health" type="Node2D" parent="."]
 script = ExtResource("4_ssyq8")
@@ -29,10 +48,7 @@ max_value = 50
 
 [node name="animated_sprite_2d" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("5_yyvre")
-animation = &"death"
-
-[node name="sprite" type="Sprite2D" parent="."]
-texture = ExtResource("4_jaleb")
+animation = &"idle"
 
 [node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("5_csdaw")
