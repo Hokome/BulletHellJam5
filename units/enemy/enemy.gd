@@ -2,6 +2,9 @@ extends Node2D
 
 @export var speed: float = 100
 
+func _ready():
+	$animation.play("idle")
+
 func select_target() -> UnitController:
 	var best_dist = INF
 	var best_unit = null

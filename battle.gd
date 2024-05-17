@@ -19,6 +19,7 @@ const STARTING_POS: Array[Vector2] = [
 @export var squad_scene: PackedScene
 
 @export var oni_scene: PackedScene
+@export var golem_scene: PackedScene
 
 var squads_info: Array[UM.Squad]
 var squad_list: Array[SquadController] = []
@@ -56,8 +57,13 @@ func create_enemies(difficulty: int):
 		while pos.length() < 500:
 			pos = get_enemy_pos()
 		
-		add_enemy(oni_scene, pos)
-		difficulty -= 1
+		var enemy := randi_range(0, 1)
+		if enemy == 0 or difficulty < 2:
+			add_enemy(oni_scene, pos)
+			difficulty -= 1
+		else:
+			add_enemy(golem_scene, pos)
+			difficulty -= 2
 
 func get_enemy_pos() -> Vector2:
 	const bound_x := 1000

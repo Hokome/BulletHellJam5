@@ -25,7 +25,7 @@ radius = 128.0
 
 [node name="enemy" type="Node2D"]
 script = ExtResource("1_trqow")
-speed = 50.0
+speed = 60.0
 
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_kqbgk")
@@ -70,7 +70,7 @@ grow_vertical = 2
 theme = ExtResource("10_jp0pc")
 show_percentage = false
 
-[node name="animated_sprite_2d" type="AnimatedSprite2D" parent="."]
+[node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("5_yyvre")
 animation = &"idle"
 
