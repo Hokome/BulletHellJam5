@@ -28,6 +28,7 @@ class Tile:
 	
 	func reset():
 		resolved = false
+		cleanup_squads()
 	
 	func cleanup_squads():
 		for s in squads:
@@ -35,6 +36,9 @@ class Tile:
 			for u in s.units:
 				if u.marked_delete:
 					s.units.erase(u)
+			if s.units.is_empty():
+				s.marked_delete = true
+			
 		for s in squads:
 			if s.marked_delete:
 				remove_squad(s)

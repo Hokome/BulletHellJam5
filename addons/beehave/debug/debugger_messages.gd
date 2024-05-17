@@ -2,6 +2,8 @@ class_name BeehaveDebuggerMessages
 
 
 static func can_send_message() -> bool:
+	# TEMPORARY
+	return false
 	return not Engine.is_editor_hint() and OS.has_feature("editor")
 
 

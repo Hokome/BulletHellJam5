@@ -20,7 +20,8 @@ var unit_info: UM.Unit
 func update_unit_info():
 	unit_info.hp = $health.value
 	
-	unit_info.marked_delete = false
+	if unit_info.hp > 0:
+		unit_info.marked_delete = false
 
 func import_unit(info: UM.Unit):
 	unit_info = info
@@ -66,6 +67,7 @@ func _physics_process(delta):
 			battle.add_child(proj)
 			proj.global_position = global_position
 			proj.look_at(target.global_position)
+			proj.damage *= unit_info.get_damage()
 			
 			attack_timer.start()
 

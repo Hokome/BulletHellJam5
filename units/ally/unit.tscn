@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctn35r33n8khl"]
+[gd_scene load_steps=10 format=3 uid="uid://ctn35r33n8khl"]
 
 [ext_resource type="Script" path="res://units/ally/unit_controller.gd" id="1_jrvp2"]
 [ext_resource type="Script" path="res://units/health.gd" id="2_ogbsk"]
 [ext_resource type="PackedScene" uid="uid://d2k6onwm0ddy8" path="res://attacks/ally_fireball.tscn" id="2_r4ga7"]
 [ext_resource type="SpriteFrames" uid="uid://cjfujb72qqmkf" path="res://units/ally/unit_frames.tres" id="3_bkyh2"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="3_e0fdt"]
+[ext_resource type="Theme" uid="uid://cnvec1w8fbn2t" path="res://ui/health_theme.tres" id="4_tr6dd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j47w0"]
-size = Vector2(64, 128)
+size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfqdi"]
 size = Vector2(32, 64)
@@ -22,9 +23,22 @@ speed = 200.0
 attack_cooldown = 2.0
 projectile_scene = ExtResource("2_r4ga7")
 
-[node name="health" type="Node2D" parent="."]
+[node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]
+position = Vector2(0, 70)
 script = ExtResource("2_ogbsk")
-max_value = 5
+ui = NodePath("health_bar")
+
+[node name="health_bar" type="ProgressBar" parent="health"]
+custom_minimum_size = Vector2(100, 10)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme = ExtResource("4_tr6dd")
+show_percentage = false
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

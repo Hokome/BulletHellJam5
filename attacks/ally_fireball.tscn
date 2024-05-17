@@ -10,7 +10,7 @@ radius = 13.1529
 script = ExtResource("1_ctm6t")
 speed = 2000.0
 faction = 1
-damage = 4
+damage = 25
 lifetime = 10.0
 
 [node name="sprite" type="Sprite2D" parent="."]

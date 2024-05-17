@@ -163,6 +163,8 @@ class Unit extends RefCounted:
 		return stats[StatType.Vitality].value
 	func get_speed() -> float:
 		return stats[StatType.Mobility].value
+	func get_damage() -> float:
+		return stats[StatType.Damage].value
 	
 	func create_stat(type: StatType, initial: StatIntensity = StatIntensity.Low):
 		var stat := UnitStat.new()

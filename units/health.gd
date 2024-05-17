@@ -3,7 +3,13 @@ class_name Health extends Node2D
 signal on_death()
 
 @export var ui: ProgressBar
-@export var max_value: int
+@export var max_value: int:
+	set(val):
+		max_value = val
+		if ui:
+			ui.max_value = max_value
+		if value > 0:
+			value = value
 
 var value: int:
 	set(val):
@@ -14,12 +20,9 @@ var value: int:
 			kill()
 
 func _ready():
-	if ui:
-		ui.max_value = max_value
-	
-	if value == 0:
+	if max_value != 0:
+		max_value = max_value
 		value = max_value
-	
 
 func kill():
 	on_death.emit()

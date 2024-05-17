@@ -69,6 +69,12 @@ func remove_enemy(enemy):
 	if enemy_list.is_empty():
 		end_battle()
 
+func remove_unit(unit: UnitController):
+	unit_list.erase(unit)
+	unit.unit_info.marked_delete = true
+	if unit_list.is_empty():
+		end_battle()
+
 func end_battle():
 	for i in squad_list.size():
 		if squad_list[i] == null:
@@ -78,6 +84,7 @@ func end_battle():
 	for c in get_children():
 		if c.name != "player":
 			c.queue_free()
+	enemy_list.clear()
 	
 	player().enabled = false
 	battle.on_going = false

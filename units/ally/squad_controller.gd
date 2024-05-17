@@ -47,7 +47,10 @@ func on_unit_died(unit):
 	units.erase(unit)
 	
 	if units.is_empty():
+		battle.squad_list.erase(self)
 		queue_free()
+	
+	battle.remove_unit(unit)
 
 func _on_mouse_entered():
 	hovered = true
