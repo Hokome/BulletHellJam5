@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjlj67eo7ah71"]
+[gd_scene load_steps=15 format=3 uid="uid://bjlj67eo7ah71"]
 
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_trqow"]
 [ext_resource type="PackedScene" uid="uid://brpqbltmcyray" path="res://attacks/projectile.tscn" id="2_r3ey5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://units/go_to_random.gd" id="6_hyt51"]
 [ext_resource type="Script" path="res://units/shoot.gd" id="7_essjv"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="7_ockc4"]
+[ext_resource type="Theme" uid="uid://cnvec1w8fbn2t" path="res://ui/health_theme.tres" id="10_jp0pc"]
 
 [sub_resource type="Resource" id="Resource_6a3tq"]
 script = ExtResource("3_v8s31")
@@ -47,9 +48,27 @@ pattern = SubResource("Resource_6a3tq")
 script = ExtResource("6_hyt51")
 selection_range = Vector2(800, 600)
 
-[node name="health" type="Node2D" parent="."]
+[node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]
+position = Vector2(0, 128)
 script = ExtResource("4_ssyq8")
+ui = NodePath("health_bar")
 max_value = 50
+
+[node name="health_bar" type="ProgressBar" parent="health"]
+custom_minimum_size = Vector2(200, 20)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_jp0pc")
+show_percentage = false
 
 [node name="animated_sprite_2d" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("5_yyvre")
