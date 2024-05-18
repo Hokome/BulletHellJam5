@@ -30,7 +30,7 @@ speed = 20.0
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_1ls4v")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@47920")
+blackboard = NodePath("@Node@17498")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]
@@ -49,7 +49,7 @@ script = ExtResource("8_hjqqx")
 selection_range = Vector2(800, 600)
 
 [node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]
-position = Vector2(0, 128)
+position = Vector2(0, 153)
 script = ExtResource("9_bj1vk")
 ui = NodePath("health_bar")
 max_value = 100

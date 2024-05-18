@@ -84,7 +84,7 @@ func get_tile(pos: Vector2i) -> Tile:
 func _ready():
 	generate_map()
 	$map_camera.translate(TILE_SIZE * HALF_MAP)
-	var starter_tile: Tile = get_tile(Vector2(1, 2))
+	var starter_tile: Tile = get_tile(Vector2(0, 1))
 	map.selected_tile = starter_tile
 	is_selecting_new_unit = true
 	
@@ -127,13 +127,15 @@ func move_squad(squad: UM.Squad, from: Tile, to: Tile):
 func _process(_delta):
 	cursor.position = get_cursor_world()
 
-func grid_to_world(grid_pos: Vector2i) -> Vector2: return (grid_pos as Vector2) * TILE_SIZE - Vector2.ONE * HALF_TILE
+func grid_to_world(grid_pos: Vector2i) -> Vector2: return (grid_pos as Vector2) * TILE_SIZE + Vector2.ONE * HALF_TILE
 
-func get_cursor_world() -> Vector2:
-	var cursor_pos = get_local_mouse_position()
-	return cursor_pos - cursor_pos.posmod(TILE_SIZE) + Vector2.ONE * HALF_TILE
+func snap_to_grid(world_pos: Vector2) -> Vector2: return world_pos - world_pos.posmod(TILE_SIZE) + Vector2.ONE * HALF_TILE
 
-func get_cursor_grid() -> Vector2i: return (get_cursor_world() / TILE_SIZE).round()
+func world_to_grid(world_pos: Vector2) -> Vector2i: return Vector2i(world_pos - world_pos.posmod(TILE_SIZE)) / TILE_SIZE
+
+func get_cursor_world() -> Vector2: return snap_to_grid(get_local_mouse_position())
+
+func get_cursor_grid() -> Vector2i: return world_to_grid(get_local_mouse_position())
 
 func _unhandled_input(event):
 	if !visible: return
@@ -171,7 +173,6 @@ func battle_end_callback():
 	$map_camera.enabled = true
 	selected_tile = null
 	fully_resolved = true
-
 
 func _on_confirm_pressed():
 	fully_resolved = false

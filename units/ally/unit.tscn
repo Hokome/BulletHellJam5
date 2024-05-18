@@ -14,13 +14,13 @@ size = Vector2(16, 32)
 size = Vector2(32, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qa1u3"]
-radius = 600.0
+radius = 900.0
 
 [node name="unit_controller" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_jrvp2")
 speed = 200.0
-attack_cooldown = 2.0
+attack_cooldown = 0.2
 projectile_scene = ExtResource("2_r4ga7")
 
 [node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]
