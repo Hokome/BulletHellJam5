@@ -18,6 +18,7 @@ func shoot(origin: Node2D, parent: Node2D, aim: Vector2):
 		proj.global_position = origin.global_position
 		proj.rotate(base + step * i)
 		if timer:
+			timer.start()
 			await timer.timeout
 	
 	if timer: timer.queue_free()

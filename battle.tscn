@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdo7efopvylma"]
+[gd_scene load_steps=7 format=3 uid="uid://bdo7efopvylma"]
 
 [ext_resource type="Script" path="res://battle.gd" id="1_j42mj"]
 [ext_resource type="PackedScene" uid="uid://bk07ru2b158kg" path="res://player.tscn" id="2_afout"]
 [ext_resource type="PackedScene" uid="uid://c3rnrx8rsva0w" path="res://units/ally/squad.tscn" id="3_vaku5"]
 [ext_resource type="PackedScene" uid="uid://bjlj67eo7ah71" path="res://units/enemy/oni.tscn" id="4_1hlqi"]
 [ext_resource type="PackedScene" uid="uid://drg3316xh8o21" path="res://units/enemy/golem.tscn" id="5_gxcfq"]
+[ext_resource type="PackedScene" uid="uid://clr7s7v8e8g2g" path="res://units/enemy/boss.tscn" id="6_cxyv2"]
 
 [node name="battle" type="Node2D"]
 script = ExtResource("1_j42mj")
@@ -12,3 +13,4 @@ player_scene = ExtResource("2_afout")
 squad_scene = ExtResource("3_vaku5")
 oni_scene = ExtResource("4_1hlqi")
 golem_scene = ExtResource("5_gxcfq")
+boss_scene = ExtResource("6_cxyv2")

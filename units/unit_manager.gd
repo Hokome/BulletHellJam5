@@ -72,7 +72,7 @@ const FEMININE_NAMES = [
 @export var hair_styles: Array[SpriteFrames]
 
 enum StatIntensity {None = 0, Low = 1, Med = 2, High = 3}
-enum StatType {None, Vitality, Mobility, Damage, Support}
+enum StatType {None, Vitality, Damage,}
 
 const STAT_BOUNDS = {
 	StatType.Vitality:
@@ -81,24 +81,11 @@ const STAT_BOUNDS = {
 			StatIntensity.Med: [20, 30],
 			StatIntensity.High: [35, 50],
 		},
-	StatType.Mobility:
-		{
-			StatIntensity.Low: [100, 150],
-			StatIntensity.Med: [200, 250],
-			StatIntensity.High: [300, 350],
-		},
 	StatType.Damage:
 		{
 			StatIntensity.Low: [0.6, 0.8],
 			StatIntensity.Med: [1, 1.2],
 			StatIntensity.High: [1.5, 2],
-		},
-	StatType.Support:
-		{
-			StatIntensity.None: [0, 0],
-			StatIntensity.Low: [0.4, 0.6],
-			StatIntensity.Med: [0.8, 1],
-			StatIntensity.High: [1.2, 1.5],
 		},
 }
 
@@ -119,12 +106,8 @@ class UnitStat:
 		match type:
 			StatType.Vitality:
 				type_s = "Vitality"
-			StatType.Mobility:
-				type_s = "Mobility"
 			StatType.Damage:
 				type_s = "Damage"
-			StatType.Support:
-				type_s = "Support"
 		return type_s
 	
 	func intensity_to_string() -> String:
@@ -161,8 +144,6 @@ class Unit extends RefCounted:
 	
 	func get_max_hp() -> float:
 		return stats[StatType.Vitality].value
-	func get_speed() -> float:
-		return stats[StatType.Mobility].value
 	func get_damage() -> float:
 		return stats[StatType.Damage].value
 	
@@ -180,12 +161,10 @@ class Unit extends RefCounted:
 	
 	func generate_stats(budget: int):
 		create_stat(StatType.Vitality)
-		create_stat(StatType.Mobility)
 		create_stat(StatType.Damage)
-		create_stat(StatType.Support, StatIntensity.None)
 		
 		while budget: 
-			var stat = randi_range(1, 3)
+			var stat = randi_range(1, 2)
 			if increment_stat(stat): budget -= 1
 		
 		for stat in stats.values():
@@ -208,7 +187,7 @@ func create_random_unit() -> Unit:
 		unit.hair_style = hair_styles[hair_style_index]
 		unit.hair_color = hair_colors[hair_color_index]
 		
-		unit.generate_stats(3)
+		unit.generate_stats(2)
 		
 		unit.hp = unit.get_max_hp()
 		

@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3 uid="uid://clr7s7v8e8g2g"]
+
+[ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_7atls"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_hhgxb"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="3_q0sji"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="4_ksixa"]
+[ext_resource type="Script" path="res://units/shoot.gd" id="5_f7xgp"]
+[ext_resource type="PackedScene" uid="uid://jccev1nmh663" path="res://attacks/projectile_fast.tscn" id="6_rjxnp"]
+[ext_resource type="Script" path="res://attacks/projectile_pattern.gd" id="7_av5po"]
+[ext_resource type="Script" path="res://units/go_to_random.gd" id="8_clc0a"]
+[ext_resource type="Script" path="res://units/health.gd" id="9_8ju6b"]
+[ext_resource type="Theme" uid="uid://cnvec1w8fbn2t" path="res://ui/health_theme.tres" id="10_pi6we"]
+[ext_resource type="SpriteFrames" uid="uid://5i2nt0ktympl" path="res://units/enemy/enemy_boss_frames.tres" id="11_sldns"]
+[ext_resource type="Script" path="res://units/hurtbox.gd" id="12_76ltc"]
+
+[sub_resource type="Resource" id="Resource_6a3tq"]
+script = ExtResource("7_av5po")
+projectile_scene = ExtResource("6_rjxnp")
+projectile_count = 12
+total_angle = 60.0
+spacing = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jqobl"]
+radius = 128.0
+
+[node name="enemy" type="Node2D"]
+script = ExtResource("1_7atls")
+
+[node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("2_hhgxb")
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@92472")
+actor = NodePath("..")
+
+[node name="sequence" type="Node" parent="tree"]
+script = ExtResource("3_q0sji")
+
+[node name="cooldown" type="Node" parent="tree/sequence"]
+script = ExtResource("4_ksixa")
+wait_time = 1.0
+
+[node name="shoot" type="Node" parent="tree/sequence/cooldown"]
+script = ExtResource("5_f7xgp")
+pattern = SubResource("Resource_6a3tq")
+is_boss = true
+offset_angle = 0.0
+
+[node name="shoot" type="Node" parent="tree/sequence"]
+script = ExtResource("5_f7xgp")
+pattern = SubResource("Resource_6a3tq")
+is_boss = true
+
+[node name="move" type="Node" parent="tree/sequence"]
+script = ExtResource("8_clc0a")
+selection_range = Vector2(800, 600)
+
+[node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]
+position = Vector2(0, 153)
+script = ExtResource("9_8ju6b")
+ui = NodePath("health_bar")
+max_value = 200
+
+[node name="health_bar" type="ProgressBar" parent="health"]
+custom_minimum_size = Vector2(400, 20)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_pi6we")
+show_percentage = false
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("11_sldns")
+animation = &"idle"
+
+[node name="hurtbox" type="Area2D" parent="."]
+script = ExtResource("12_76ltc")
+faction = 2
+
+[node name="shape" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_jqobl")
+debug_color = Color(0.844988, 0.00101402, 0.911744, 0.42)
+
+[connection signal="on_damage" from="hurtbox" to="health" method="damage"]

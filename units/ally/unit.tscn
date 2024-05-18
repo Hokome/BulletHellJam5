@@ -19,8 +19,8 @@ radius = 900.0
 [node name="unit_controller" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_jrvp2")
-speed = 200.0
-attack_cooldown = 0.2
+speed = 400.0
+attack_cooldown = 1.0
 projectile_scene = ExtResource("2_r4ga7")
 
 [node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]

@@ -111,7 +111,7 @@ func generate_map():
 			tile.type = 0
 			tile.position = Vector2i(x, y)
 			if x == MAP_SIZE.x - 1 and y == boss_y:
-				tile.difficulty = 70
+				tile.difficulty = 60
 				tile_map.set_cell(0, Vector2i(x, y), 1, Vector2i(0, 0))
 			else:
 				tile.difficulty = x * 2 + 2

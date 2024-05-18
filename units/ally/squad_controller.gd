@@ -43,6 +43,7 @@ func update_units():
 		u.update_unit_info()
 
 func on_unit_died(unit):
+	unit.queue_free()
 	anchor_changed.disconnect(unit.reposition)
 	units.erase(unit)
 	

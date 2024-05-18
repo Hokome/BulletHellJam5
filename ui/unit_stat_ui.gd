@@ -9,7 +9,6 @@ func display_stats(unit: UM.Unit):
 		c.free()
 	
 	for s: UM.UnitStat in unit.stats.values():
-		if s.type == UM.StatType.Support: continue
 		var stat_ui = stat_scene.instantiate()
 		stat_list.add_child(stat_ui)
 		stat_ui.find_child("type").text = s.type_to_string() + ": "
