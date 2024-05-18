@@ -86,7 +86,10 @@ func add_enemy(enemy_scene: PackedScene, pos: Vector2):
 	new_enemy.get_node("health").on_death.connect(remove_enemy.bind(new_enemy))
 
 func remove_enemy(enemy):
+	enemy.get_node("animation").play("death")
+	await enemy.get_node("animation").animation_finished
 	enemy_list.erase(enemy)
+	enemy.queue_free()
 	if enemy_list.is_empty():
 		end_battle()
 

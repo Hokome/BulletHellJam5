@@ -26,7 +26,8 @@ func _ready():
 
 func kill():
 	on_death.emit()
-	get_parent().queue_free()
+	
+	#get_parent().queue_free()
 
 func damage(amount: int):
 	value -= amount
