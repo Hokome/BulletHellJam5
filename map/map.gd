@@ -25,6 +25,7 @@ class Tile:
 	var squads: Array[UM.Squad] = []
 	var map_icon: Sprite2D
 	var resolved := false
+	var difficulty: int = 0
 	
 	func reset():
 		resolved = false
@@ -101,13 +102,21 @@ func _ready():
 
 func generate_map():
 	var tile_map: TileMap = $tiles
+	var boss_y := randi_range(0, MAP_SIZE.y - 1)
+	
 	for x in MAP_SIZE.x:
 		tiles.append([])
 		for y in MAP_SIZE.y:
 			var tile = Tile.new()
 			tile.type = 0
 			tile.position = Vector2i(x, y)
-			tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
+			if x == MAP_SIZE.x - 1 and y == boss_y:
+				tile.difficulty = 70
+				tile_map.set_cell(0, Vector2i(x, y), 1, Vector2i(0, 0))
+			else:
+				tile.difficulty = x * 2 + 2
+				tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
+			
 			tiles[x].append(tile)
 
 func move_squad(squad: UM.Squad, from: Tile, to: Tile):
@@ -160,7 +169,7 @@ func battle_end_callback():
 			if !ty.squads.is_empty():
 				ty.resolved = true
 				ty.cleanup_squads()
-				battle.start_battle.call_deferred(ty.squads, (ty.position.x) * 2)
+				battle.start_battle.call_deferred(ty.squads, ty.difficulty)
 				return
 			ty.resolved = true
 	
