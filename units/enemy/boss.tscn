@@ -1,16 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://clr7s7v8e8g2g"]
+[gd_scene load_steps=15 format=3 uid="uid://0e1cpmp36x5f"]
 
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_7atls"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_hhgxb"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="3_q0sji"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="4_ksixa"]
 [ext_resource type="Script" path="res://units/shoot.gd" id="5_f7xgp"]
-[ext_resource type="PackedScene" uid="uid://jccev1nmh663" path="res://attacks/projectile_fast.tscn" id="6_rjxnp"]
+[ext_resource type="PackedScene" path="res://attacks/projectile_fast.tscn" id="6_rjxnp"]
 [ext_resource type="Script" path="res://attacks/projectile_pattern.gd" id="7_av5po"]
 [ext_resource type="Script" path="res://units/go_to_random.gd" id="8_clc0a"]
 [ext_resource type="Script" path="res://units/health.gd" id="9_8ju6b"]
-[ext_resource type="Theme" uid="uid://cnvec1w8fbn2t" path="res://ui/health_theme.tres" id="10_pi6we"]
-[ext_resource type="SpriteFrames" uid="uid://5i2nt0ktympl" path="res://units/enemy/enemy_boss_frames.tres" id="11_sldns"]
+[ext_resource type="Theme" uid="uid://ba7iu7ditnbgw" path="res://ui/unit_health_theme.tres" id="10_alrpq"]
+[ext_resource type="SpriteFrames" uid="uid://dhnixay6xg5u2" path="res://units/enemy/enemy_boss_frames.tres" id="11_sldns"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="12_76ltc"]
 
 [sub_resource type="Resource" id="Resource_6a3tq"]
@@ -29,7 +29,7 @@ script = ExtResource("1_7atls")
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_hhgxb")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@92472")
+blackboard = NodePath("@Node@91483")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]
@@ -73,7 +73,7 @@ offset_right = 100.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("10_pi6we")
+theme = ExtResource("10_alrpq")
 show_percentage = false
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
