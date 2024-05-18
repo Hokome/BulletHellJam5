@@ -58,7 +58,7 @@ func _physics_process(delta):
 			var diff = (target_position - global_position)
 			velocity = diff.normalized() * speed
 			move_and_slide()
-	elif can_attack():
+	if can_attack():
 		if enemies_in_range.size() > 0:
 			var target = enemies_in_range[0]
 			var proj: Node2D = projectile_scene.instantiate()

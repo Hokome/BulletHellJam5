@@ -29,7 +29,7 @@ script = ExtResource("1_7atls")
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_hhgxb")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@92472")
+blackboard = NodePath("@Node@17500")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]

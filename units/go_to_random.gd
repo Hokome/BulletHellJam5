@@ -8,7 +8,6 @@ func before_run(actor: Node, blackboard: Blackboard):
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	if not actor is Node2D: return FAILURE
-	print("test")
 	
 	var diff: Vector2 = point - actor.global_position
 	var dist := diff.length()
