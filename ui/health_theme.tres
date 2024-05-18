@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://cnvec1w8fbn2t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xoexv"]
-bg_color = Color(0.0985167, 0.23, 0.0046, 1)
+bg_color = Color(0.137255, 0.219608, 0.0588235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vioex"]
-bg_color = Color(0.368027, 0.74, 0.3108, 1)
+bg_color = Color(0.380392, 0.572549, 0.231373, 1)
 
 [resource]
 ProgressBar/styles/background = SubResource("StyleBoxFlat_xoexv")

@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://units/go_to_random.gd" id="6_hyt51"]
 [ext_resource type="Script" path="res://units/shoot.gd" id="7_essjv"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="7_ockc4"]
-[ext_resource type="Theme" uid="uid://cnvec1w8fbn2t" path="res://ui/health_theme.tres" id="10_jp0pc"]
+[ext_resource type="Theme" uid="uid://ba7iu7ditnbgw" path="res://ui/unit_health_theme.tres" id="10_prjt4"]
 
 [sub_resource type="Resource" id="Resource_6a3tq"]
 script = ExtResource("3_v8s31")
@@ -30,7 +30,7 @@ speed = 60.0
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_kqbgk")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17496")
+blackboard = NodePath("@Node@67384")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]
@@ -67,12 +67,12 @@ offset_right = 100.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("10_jp0pc")
+theme = ExtResource("10_prjt4")
 show_percentage = false
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("5_yyvre")
-animation = &"idle"
+animation = &"death"
 
 [node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("5_csdaw")
