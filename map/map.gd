@@ -91,7 +91,7 @@ func start():
 	var starter_tile: Tile = get_tile(Vector2(0, 1))
 	map.selected_tile = starter_tile
 	is_selecting_new_unit = true
-	$map_camera.position = Vector2.ONE * TILE_SIZE * HALF_MAP
+	
 	
 	for i in 3:
 		var starter_units: Array[UM.Unit] = [um.create_random_unit(), um.create_random_unit(), um.create_random_unit()]

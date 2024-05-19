@@ -30,7 +30,7 @@ speed = 20.0
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_1ls4v")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17546")
+blackboard = NodePath("@Node@144561")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]
@@ -43,7 +43,6 @@ wait_time = 8.0
 [node name="shoot" type="Node" parent="tree/sequence/cooldown"]
 script = ExtResource("5_f4m12")
 pattern = SubResource("Resource_6a3tq")
-aiming = true
 
 [node name="move" type="Node" parent="tree/sequence"]
 script = ExtResource("8_hjqqx")

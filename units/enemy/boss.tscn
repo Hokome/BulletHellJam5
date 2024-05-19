@@ -23,13 +23,13 @@ spacing = 0.1
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqobl"]
 radius = 128.0
 
-[node name="enemy" type="Node2D"]
+[node name="enemy_2" type="Node2D"]
 script = ExtResource("1_7atls")
 
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_hhgxb")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17548")
+blackboard = NodePath("@Node@144927")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]
