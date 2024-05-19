@@ -30,7 +30,7 @@ speed = 60.0
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_kqbgk")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@67384")
+blackboard = NodePath("@Node@17496")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]
@@ -69,6 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("10_prjt4")
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("5_yyvre")

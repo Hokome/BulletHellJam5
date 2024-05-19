@@ -1,10 +1,86 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdokj8ywtcxke"]
+[gd_scene load_steps=4 format=3 uid="uid://cdokj8ywtcxke"]
 
-[ext_resource type="PackedScene" uid="uid://dy6kdgxhjl6m5" path="res://ui/pause_menu.tscn" id="1_efv2c"]
 [ext_resource type="Script" path="res://ui/menu_manager.gd" id="1_mkutk"]
+[ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="3_jr6h4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfsr7"]
+bg_color = Color(0.111197, 0.111197, 0.111197, 1)
 
 [node name="menus" type="CanvasLayer"]
 script = ExtResource("1_mkutk")
 
-[node name="pause_menu" parent="." instance=ExtResource("1_efv2c")]
+[node name="pause_menu" type="PanelContainer" parent="."]
 visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="pause_menu"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="vbox" type="VBoxContainer" parent="pause_menu/margin"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="resume" type="Button" parent="pause_menu/margin/vbox"]
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+text = "Resume"
+
+[node name="settings" type="Button" parent="pause_menu/margin/vbox"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+
+[node name="exit" type="Button" parent="pause_menu/margin/vbox"]
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+text = "Exit"
+
+[node name="end_game_screen" type="PanelContainer" parent="."]
+visible = false
+offset_left = 1700.0
+offset_top = 995.0
+offset_right = 1740.0
+offset_bottom = 1035.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mfsr7")
+
+[node name="margin" type="MarginContainer" parent="end_game_screen"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="vbox" type="VBoxContainer" parent="end_game_screen/margin"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="end_game_screen/margin/vbox"]
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+text = "Game over"
+horizontal_alignment = 1
+
+[node name="restart" type="Button" parent="end_game_screen/margin/vbox"]
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+text = "Restart"
+
+[node name="exit" type="Button" parent="end_game_screen/margin/vbox"]
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+text = "Exit"
+
+[connection signal="pressed" from="pause_menu/margin/vbox/resume" to="." method="resume"]
+[connection signal="pressed" from="pause_menu/margin/vbox/exit" to="." method="exit"]
+[connection signal="pressed" from="end_game_screen/margin/vbox/restart" to="." method="restart"]
+[connection signal="pressed" from="end_game_screen/margin/vbox/exit" to="." method="exit"]

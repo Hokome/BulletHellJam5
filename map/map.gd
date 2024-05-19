@@ -108,12 +108,13 @@ func generate_map():
 		tiles.append([])
 		for y in MAP_SIZE.y:
 			var tile = Tile.new()
-			tile.type = 0
 			tile.position = Vector2i(x, y)
 			if x == MAP_SIZE.x - 1 and y == boss_y:
+				tile.type = 1
 				tile.difficulty = 60
 				tile_map.set_cell(0, Vector2i(x, y), 1, Vector2i(0, 0))
 			else:
+				tile.type = 0
 				tile.difficulty = x * 2 + 2
 				tile_map.set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
 			
@@ -165,7 +166,8 @@ func battle_end_callback():
 	
 	for tx in tiles:
 		for ty: Tile in tx:
-			if ty.resolved: continue
+			if ty.resolved: 
+				continue
 			if !ty.squads.is_empty():
 				ty.resolved = true
 				ty.cleanup_squads()
@@ -182,6 +184,15 @@ func battle_end_callback():
 	$map_camera.enabled = true
 	selected_tile = null
 	fully_resolved = true
+	
+	if um.full_squad_dictionary.is_empty():
+		menus.display_end(false)
+	for tx in tiles:
+		for ty: Tile in tx:
+			if ty.squads.is_empty(): continue
+			if ty.type != 1: continue
+			
+			#win
 
 func _on_confirm_pressed():
 	fully_resolved = false
