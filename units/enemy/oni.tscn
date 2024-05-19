@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_trqow"]
 [ext_resource type="PackedScene" uid="uid://brpqbltmcyray" path="res://attacks/projectile.tscn" id="2_r3ey5"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/simple_parallel.gd" id="3_254di"]
 [ext_resource type="Script" path="res://attacks/projectile_pattern.gd" id="3_v8s31"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_kqbgk"]
 [ext_resource type="Script" path="res://units/health.gd" id="4_ssyq8"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="5_0tapf"]
 [ext_resource type="Script" path="res://units/hurtbox.gd" id="5_csdaw"]
 [ext_resource type="SpriteFrames" uid="uid://8h4sbcws6xtk" path="res://units/enemy/enemy_oni_frames.tres" id="5_yyvre"]
 [ext_resource type="Script" path="res://units/go_to_random.gd" id="6_hyt51"]
@@ -30,23 +30,24 @@ speed = 60.0
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_kqbgk")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@144195")
+blackboard = NodePath("@Node@126802")
 actor = NodePath("..")
 
-[node name="sequence" type="Node" parent="tree"]
-script = ExtResource("5_0tapf")
+[node name="parallel" type="Node" parent="tree"]
+script = ExtResource("3_254di")
 
-[node name="cooldown" type="Node" parent="tree/sequence"]
-script = ExtResource("7_ockc4")
-wait_time = 5.0
-
-[node name="shoot" type="Node" parent="tree/sequence/cooldown"]
-script = ExtResource("7_essjv")
-pattern = SubResource("Resource_6a3tq")
-
-[node name="move" type="Node" parent="tree/sequence"]
+[node name="move" type="Node" parent="tree/parallel"]
 script = ExtResource("6_hyt51")
 selection_range = Vector2(800, 600)
+
+[node name="cooldown" type="Node" parent="tree/parallel"]
+script = ExtResource("7_ockc4")
+wait_time = 8.0
+
+[node name="shoot" type="Node" parent="tree/parallel/cooldown"]
+script = ExtResource("7_essjv")
+pattern = SubResource("Resource_6a3tq")
+aiming = true
 
 [node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]
 position = Vector2(0, 128)

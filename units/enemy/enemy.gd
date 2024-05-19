@@ -14,5 +14,3 @@ func select_target() -> UnitController:
 			best_unit = u
 			best_dist = best_dist
 	return best_unit
-
-

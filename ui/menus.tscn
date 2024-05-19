@@ -4,8 +4,8 @@
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="3_jr6h4"]
 [ext_resource type="Script" path="res://ui/menu_button.gd" id="3_pc8c4"]
 [ext_resource type="Script" path="res://tutorial/tutorial.gd" id="4_mjbqm"]
-[ext_resource type="Texture2D" uid="uid://3k3dyb7tst31" path="res://tutorial/add_squads.png" id="5_uguu2"]
-[ext_resource type="Texture2D" uid="uid://c5xohvvu7rso6" path="res://tutorial/move_squad_tile.png" id="6_j16n3"]
+[ext_resource type="Texture2D" uid="uid://bmsdub4xqnbse" path="res://tutorial/add_squads.png" id="5_uguu2"]
+[ext_resource type="Texture2D" uid="uid://dgbllwr2wk04b" path="res://tutorial/move_squad_tile.png" id="6_j16n3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfsr7"]
 bg_color = Color(0.111197, 0.111197, 0.111197, 1)
@@ -40,10 +40,10 @@ layout_mode = 2
 theme = ExtResource("3_jr6h4")
 text = "Resume"
 
-[node name="settings" type="Button" parent="pause_menu/margin/vbox"]
-visible = false
+[node name="restart" type="Button" parent="pause_menu/margin/vbox"]
 layout_mode = 2
 theme = ExtResource("3_jr6h4")
+text = "Restart"
 
 [node name="tutorial" type="Button" parent="pause_menu/margin/vbox"]
 layout_mode = 2
@@ -153,6 +153,7 @@ script = ExtResource("3_pc8c4")
 menu_name = "pause_menu"
 
 [connection signal="pressed" from="pause_menu/margin/vbox/resume" to="." method="resume"]
+[connection signal="pressed" from="pause_menu/margin/vbox/restart" to="." method="restart"]
 [connection signal="pressed" from="pause_menu/margin/vbox/exit" to="." method="exit"]
 [connection signal="pressed" from="end_game_screen/margin/vbox/restart" to="." method="restart"]
 [connection signal="pressed" from="end_game_screen/margin/vbox/exit" to="." method="exit"]

@@ -33,3 +33,4 @@ func exit():
 
 func restart():
 	map.start()
+	select_menu("")

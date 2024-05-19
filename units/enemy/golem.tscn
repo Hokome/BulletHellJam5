@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://units/enemy/enemy.gd" id="1_pwawl"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_1ls4v"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="3_n3u1m"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/simple_parallel.gd" id="3_iqkib"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="4_snv1s"]
 [ext_resource type="Script" path="res://units/shoot.gd" id="5_f4m12"]
 [ext_resource type="PackedScene" uid="uid://brpqbltmcyray" path="res://attacks/projectile.tscn" id="6_q3otv"]
@@ -30,23 +30,24 @@ speed = 20.0
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_1ls4v")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@144561")
+blackboard = NodePath("@Node@127168")
 actor = NodePath("..")
 
-[node name="sequence" type="Node" parent="tree"]
-script = ExtResource("3_n3u1m")
+[node name="parallel" type="Node" parent="tree"]
+script = ExtResource("3_iqkib")
 
-[node name="cooldown" type="Node" parent="tree/sequence"]
-script = ExtResource("4_snv1s")
-wait_time = 8.0
-
-[node name="shoot" type="Node" parent="tree/sequence/cooldown"]
-script = ExtResource("5_f4m12")
-pattern = SubResource("Resource_6a3tq")
-
-[node name="move" type="Node" parent="tree/sequence"]
+[node name="move" type="Node" parent="tree/parallel"]
 script = ExtResource("8_hjqqx")
 selection_range = Vector2(800, 600)
+
+[node name="cooldown" type="Node" parent="tree/parallel"]
+script = ExtResource("4_snv1s")
+wait_time = 6.0
+
+[node name="shoot" type="Node" parent="tree/parallel/cooldown"]
+script = ExtResource("5_f4m12")
+pattern = SubResource("Resource_6a3tq")
+offset_angle = 0.785
 
 [node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]
 position = Vector2(0, 128)

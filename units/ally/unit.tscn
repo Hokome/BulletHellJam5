@@ -20,7 +20,7 @@ radius = 600.0
 motion_mode = 1
 script = ExtResource("1_jrvp2")
 speed = 200.0
-attack_cooldown = 0.2
+attack_cooldown = 1.0
 projectile_scene = ExtResource("2_r4ga7")
 
 [node name="health" type="Node2D" parent="." node_paths=PackedStringArray("ui")]

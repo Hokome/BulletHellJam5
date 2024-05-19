@@ -173,8 +173,6 @@ class Unit extends RefCounted:
 			stat.generate_precise()
 
 func remove_squad(squad: Squad):
-	print(squad.name)
-	print_stack()
 	full_squad_dictionary.erase(squad.id)
 
 func create_random_unit() -> Unit:
