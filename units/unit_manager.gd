@@ -140,9 +140,6 @@ class Unit extends RefCounted:
 	var marked_delete := false:
 		set(val):
 			marked_delete = val
-			print(name)
-			print_stack()
-			print()
 	
 	func remove_from_squad():
 		squad.remove_unit(self)
@@ -176,6 +173,8 @@ class Unit extends RefCounted:
 			stat.generate_precise()
 
 func remove_squad(squad: Squad):
+	print(squad.name)
+	print_stack()
 	full_squad_dictionary.erase(squad.id)
 
 func create_random_unit() -> Unit:
@@ -210,15 +209,6 @@ func create_squad() -> Squad:
 	squad.marked_delete = true
 	
 	return squad
-
-func add_squads():
-	var tile: Map.Tile = map.tiles[6][6]
-	tile.add_squad(create_squad())
-	tile.add_squad(create_squad())
-	
-	add_unit(tile.squads[0], "John")
-	add_unit(tile.squads[0], "Kevin")
-	add_unit(tile.squads[1], "Bob")
 
 func add_unit(squad: Squad, unit_name: String):
 	var unit := Unit.new()

@@ -31,6 +31,5 @@ func resume():
 func exit():
 	get_tree().quit()
 
-
 func restart():
-	pass # Replace with function body.
+	map.start()

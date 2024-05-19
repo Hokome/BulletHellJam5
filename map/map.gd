@@ -35,7 +35,6 @@ class Tile:
 		for s in squads:
 			s.pos_locked = false
 			for u in s.units:
-				print(u.name, " removed: ", u.marked_delete)
 				if u.marked_delete:
 					s.remove_unit(u)
 			
@@ -52,13 +51,16 @@ class Tile:
 		map.add_child(map_icon)
 		map_icon.position = map.grid_to_world(position)
 	
-	func remove_squad(squad: UM.Squad):
+	func remove_squad_here(squad: UM.Squad):
 		squads.erase(squad)
-		um.remove_squad(squad)
 		
 		if !squads.is_empty(): return
 		
 		map_icon.queue_free()
+	
+	func remove_squad(squad: UM.Squad):
+		remove_squad_here(squad)
+		um.remove_squad(squad)
 
 @onready var map_ui: MapUI = $map_ui
 
@@ -83,15 +85,17 @@ func get_tile(pos: Vector2i) -> Tile:
 	return tiles[pos.x][pos.y]
 
 func start():
+	time_manager.paused = false
+	menus.select_menu("")
+	
 	um.clear_all()
 	tiles.clear()
 	
 	generate_map()
-	$map_camera.translate(TILE_SIZE * HALF_MAP)
+	$map_camera.position = TILE_SIZE * HALF_MAP
 	var starter_tile: Tile = get_tile(Vector2(0, 1))
 	map.selected_tile = starter_tile
 	is_selecting_new_unit = true
-	$map_camera.position = Vector2.ONE * TILE_SIZE * HALF_MAP
 	
 	for i in 3:
 		var starter_units: Array[UM.Unit] = [um.create_random_unit(), um.create_random_unit(), um.create_random_unit()]
@@ -102,6 +106,7 @@ func start():
 	
 	is_selecting_new_unit = false
 	selected_tile = starter_tile
+
 func _ready():
 	start()
 
@@ -134,7 +139,7 @@ func move_squad(squad: UM.Squad, from: Tile, to: Tile):
 	
 	if squad.pos_locked: return
 	
-	from.remove_squad(squad)
+	from.remove_squad_here(squad)
 	to.add_squad(squad)
 	squad.pos_locked = true
 	
@@ -194,12 +199,15 @@ func battle_end_callback():
 	
 	if um.full_squad_dictionary.is_empty():
 		menus.display_end(false)
+		time_manager.paused = true
+		return
 	for tx in tiles:
 		for ty: Tile in tx:
 			if ty.squads.is_empty(): continue
 			if ty.type != 1: continue
 			
-			#win
+			menus.display_end(true)
+			time_manager.paused = true
 
 func _on_confirm_pressed():
 	fully_resolved = false

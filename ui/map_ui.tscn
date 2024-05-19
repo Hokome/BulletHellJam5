@@ -87,33 +87,8 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="game_over_panel" type="PanelContainer" parent="center"]
-visible = false
-layout_mode = 2
-
-[node name="margin" type="MarginContainer" parent="center/game_over_panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="vbox" type="VBoxContainer" parent="center/game_over_panel/margin"]
-layout_mode = 2
-
-[node name="game_over" type="Label" parent="center/game_over_panel/margin/vbox"]
-layout_mode = 2
-theme = ExtResource("4_xgdp5")
-text = "GAME OVER"
-
-[node name="restart" type="Button" parent="center/game_over_panel/margin/vbox"]
-layout_mode = 2
-theme = ExtResource("4_xgdp5")
-text = "Restart"
-
 [node name="stat_tooltip" parent="." instance=ExtResource("6_yxsls")]
 visible = false
 custom_minimum_size = Vector2(400, 0)
 
 [connection signal="pressed" from="right/vbox/new_squad" to="." method="_on_new_squad_pressed"]
-[connection signal="pressed" from="center/game_over_panel/margin/vbox/restart" to="." method="_on_restart_pressed"]

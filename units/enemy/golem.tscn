@@ -70,6 +70,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("10_4nshy")
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("11_fqvyf")
