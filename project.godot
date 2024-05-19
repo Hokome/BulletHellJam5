@@ -17,13 +17,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 time_manager="*res://time_manager.gd"
 debugger="*res://debug/debugger.tscn"
 battle="*res://battle.tscn"
 menus="*res://ui/menus.tscn"
 map="*res://map/map.tscn"
 um="*res://units/um.tscn"
-BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
+menus="*res://ui/menus.tscn"
 
 [display]
 

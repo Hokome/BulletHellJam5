@@ -31,7 +31,6 @@ func import_unit(info: UM.Unit):
 	
 	unit_info.marked_delete = true
 	
-	
 	hair_sprite.sprite_frames = info.hair_style
 	hair_sprite.modulate = info.hair_color
 	

@@ -137,7 +137,12 @@ class Unit extends RefCounted:
 	var hair_color: Color
 	
 	var squad: Squad
-	var marked_delete := false
+	var marked_delete := false:
+		set(val):
+			marked_delete = val
+			print(name)
+			print_stack()
+			print()
 	
 	func remove_from_squad():
 		squad.remove_unit(self)
@@ -169,6 +174,9 @@ class Unit extends RefCounted:
 		
 		for stat in stats.values():
 			stat.generate_precise()
+
+func remove_squad(squad: Squad):
+	full_squad_dictionary.erase(squad.id)
 
 func create_random_unit() -> Unit:
 		var unit := Unit.new()
@@ -218,3 +226,6 @@ func add_unit(squad: Squad, unit_name: String):
 	unit.max_hp = 5
 	unit.hp = unit.max_hp
 	squad.add_unit(unit)
+
+func clear_all():
+	full_squad_dictionary.clear()

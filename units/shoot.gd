@@ -31,5 +31,8 @@ func shoot_async(actor: Node2D):
 		aim_vector = aim_vector.rotated(PI / 4)
 	else:
 		var target: Node2D = actor.select_target()
+		if target == null:
+			is_shooting = false
+			return
 		await pattern.shoot(actor, battle, (target.global_position - actor.global_position).normalized())
 	is_shooting = false
