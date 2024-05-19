@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdokj8ywtcxke"]
+[gd_scene load_steps=8 format=3 uid="uid://cdokj8ywtcxke"]
 
 [ext_resource type="Script" path="res://ui/menu_manager.gd" id="1_mkutk"]
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="3_jr6h4"]
+[ext_resource type="Script" path="res://ui/menu_button.gd" id="3_pc8c4"]
+[ext_resource type="Script" path="res://tutorial/tutorial.gd" id="4_mjbqm"]
+[ext_resource type="Texture2D" uid="uid://3k3dyb7tst31" path="res://tutorial/add_squads.png" id="5_uguu2"]
+[ext_resource type="Texture2D" uid="uid://c5xohvvu7rso6" path="res://tutorial/move_squad_tile.png" id="6_j16n3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfsr7"]
 bg_color = Color(0.111197, 0.111197, 0.111197, 1)
@@ -40,6 +44,13 @@ text = "Resume"
 visible = false
 layout_mode = 2
 theme = ExtResource("3_jr6h4")
+
+[node name="tutorial" type="Button" parent="pause_menu/margin/vbox"]
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+text = "Tutorial"
+script = ExtResource("3_pc8c4")
+menu_name = "tutorial_menu"
 
 [node name="exit" type="Button" parent="pause_menu/margin/vbox"]
 layout_mode = 2
@@ -80,7 +91,70 @@ layout_mode = 2
 theme = ExtResource("3_jr6h4")
 text = "Exit"
 
+[node name="tutorial_menu" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -72.5
+offset_right = 99.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_mjbqm")
+tutorial_list = Array[Texture]([ExtResource("5_uguu2"), ExtResource("6_j16n3"), null, null, null, null, null, null, null])
+
+[node name="margin_container" type="MarginContainer" parent="tutorial_menu"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="v_box_container" type="VBoxContainer" parent="tutorial_menu/margin_container"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="texture_rect" type="TextureRect" parent="tutorial_menu/margin_container/v_box_container"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("5_uguu2")
+expand_mode = 3
+
+[node name="h_box_container" type="HBoxContainer" parent="tutorial_menu/margin_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="previous" type="Button" parent="tutorial_menu/margin_container/v_box_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_jr6h4")
+action_mode = 0
+text = "Previous"
+
+[node name="next" type="Button" parent="tutorial_menu/margin_container/v_box_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_jr6h4")
+action_mode = 0
+text = "Next"
+
+[node name="back" type="Button" parent="tutorial_menu/margin_container/v_box_container"]
+layout_mode = 2
+theme = ExtResource("3_jr6h4")
+text = "Back
+"
+script = ExtResource("3_pc8c4")
+menu_name = "pause_menu"
+
 [connection signal="pressed" from="pause_menu/margin/vbox/resume" to="." method="resume"]
 [connection signal="pressed" from="pause_menu/margin/vbox/exit" to="." method="exit"]
 [connection signal="pressed" from="end_game_screen/margin/vbox/restart" to="." method="restart"]
 [connection signal="pressed" from="end_game_screen/margin/vbox/exit" to="." method="exit"]
+[connection signal="pressed" from="tutorial_menu/margin_container/v_box_container/h_box_container/previous" to="tutorial_menu" method="_on_previous_pressed"]
+[connection signal="pressed" from="tutorial_menu/margin_container/v_box_container/h_box_container/next" to="tutorial_menu" method="_on_next_pressed"]
