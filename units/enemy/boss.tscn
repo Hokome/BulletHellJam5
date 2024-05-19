@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="3_q0sji"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="4_ksixa"]
 [ext_resource type="Script" path="res://units/shoot.gd" id="5_f7xgp"]
-[ext_resource type="PackedScene" uid="uid://jccev1nmh663" path="res://attacks/projectile_fast.tscn" id="6_rjxnp"]
+[ext_resource type="PackedScene" path="res://attacks/projectile_fast.tscn" id="6_rjxnp"]
 [ext_resource type="Script" path="res://attacks/projectile_pattern.gd" id="7_av5po"]
 [ext_resource type="Script" path="res://units/go_to_random.gd" id="8_clc0a"]
 [ext_resource type="Script" path="res://units/health.gd" id="9_8ju6b"]
@@ -29,7 +29,7 @@ script = ExtResource("1_7atls")
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_hhgxb")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17500")
+blackboard = NodePath("@Node@17548")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]

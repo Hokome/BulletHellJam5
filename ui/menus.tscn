@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdokj8ywtcxke"]
+[gd_scene load_steps=5 format=3 uid="uid://cdokj8ywtcxke"]
 
 [ext_resource type="Script" path="res://ui/menu_manager.gd" id="1_mkutk"]
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="3_jr6h4"]
+[ext_resource type="PackedScene" uid="uid://dycjk5kh2idnl" path="res://tutorial/tutorial.tscn" id="3_xceol"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfsr7"]
 bg_color = Color(0.111197, 0.111197, 0.111197, 1)
@@ -79,6 +80,9 @@ text = "Restart"
 layout_mode = 2
 theme = ExtResource("3_jr6h4")
 text = "Exit"
+
+[node name="tutorial_menu" parent="." instance=ExtResource("3_xceol")]
+visible = false
 
 [connection signal="pressed" from="pause_menu/margin/vbox/resume" to="." method="resume"]
 [connection signal="pressed" from="pause_menu/margin/vbox/exit" to="." method="exit"]

@@ -30,7 +30,7 @@ speed = 20.0
 [node name="tree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_1ls4v")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17498")
+blackboard = NodePath("@Node@17546")
 actor = NodePath("..")
 
 [node name="sequence" type="Node" parent="tree"]
