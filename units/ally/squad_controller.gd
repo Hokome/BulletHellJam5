@@ -44,7 +44,8 @@ func update_units():
 
 func on_unit_died(unit):
 	unit.queue_free()
-	anchor_changed.disconnect(unit.reposition)
+	if anchor_changed.is_connected(unit.reposition):
+		anchor_changed.disconnect(unit.reposition)
 	units.erase(unit)
 	
 	if units.is_empty():

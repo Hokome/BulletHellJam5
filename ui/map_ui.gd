@@ -143,6 +143,9 @@ func move_to_squad(squad: UM.Squad):
 	var old_ui = elem_dictionary[old_squad]
 	old_ui.trash_button.visible = old_squad.marked_delete
 
+func display_game_over():
+	$center/game_over_panel.visible = true
+
 func on_trash_button_pressed(squad: UM.Squad):
 	map.selected_tile.remove_squad(squad)
 	elem_dictionary[squad].queue_free()
@@ -152,3 +155,7 @@ func _on_new_squad_pressed():
 	map.selected_tile.add_squad(squad)
 
 	create_squad_ui(squad)
+
+
+func _on_restart_pressed():
+	map.start()

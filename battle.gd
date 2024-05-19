@@ -97,8 +97,8 @@ func remove_enemy(enemy):
 		end_battle()
 
 func remove_unit(unit: UnitController):
-	unit_list.erase(unit)
 	unit.unit_info.marked_delete = true
+	unit_list.erase(unit)
 	if unit_list.is_empty():
 		end_battle()
 
@@ -115,7 +115,7 @@ func end_battle():
 	
 	player().enabled = false
 	battle.on_going = false
-	map.battle_end_callback()
+	map.battle_end_callback.call_deferred()
 
 func add_decor():
 	pass

@@ -35,10 +35,9 @@ class Tile:
 		for s in squads:
 			s.pos_locked = false
 			for u in s.units:
+				print(u.name, " removed: ", u.marked_delete)
 				if u.marked_delete:
-					s.units.erase(u)
-			if s.units.is_empty():
-				s.marked_delete = true
+					s.remove_unit(u)
 			
 		for s in squads:
 			if s.marked_delete:
@@ -55,6 +54,7 @@ class Tile:
 	
 	func remove_squad(squad: UM.Squad):
 		squads.erase(squad)
+		um.remove_squad(squad)
 		
 		if !squads.is_empty(): return
 		
@@ -82,28 +82,34 @@ func get_tile(pos: Vector2i) -> Tile:
 	if pos.x >= MAP_SIZE.x or pos.y >= MAP_SIZE.y: return null
 	return tiles[pos.x][pos.y]
 
-func _ready():
+func start():
+	um.clear_all()
+	tiles.clear()
+	
 	generate_map()
 	$map_camera.translate(TILE_SIZE * HALF_MAP)
 	var starter_tile: Tile = get_tile(Vector2(0, 1))
 	map.selected_tile = starter_tile
 	is_selecting_new_unit = true
+	$map_camera.position = Vector2.ONE * TILE_SIZE * HALF_MAP
 	
 	for i in 3:
 		var starter_units: Array[UM.Unit] = [um.create_random_unit(), um.create_random_unit(), um.create_random_unit()]
-			
+		
 		map_ui.display_new_units(starter_units)
 		
 		await map_ui.on_new_unit_selected
 	
 	is_selecting_new_unit = false
 	selected_tile = starter_tile
-
+func _ready():
+	start()
 
 func generate_map():
 	var tile_map: TileMap = $tiles
 	var boss_y := randi_range(0, MAP_SIZE.y - 1)
 	
+	tile_map.clear()
 	for x in MAP_SIZE.x:
 		tiles.append([])
 		for y in MAP_SIZE.y:
@@ -177,6 +183,7 @@ func battle_end_callback():
 	
 	visible = true
 	map_ui.visible = true
+	
 	for tx in tiles:
 		for ty: Tile in tx:
 			ty.reset()
