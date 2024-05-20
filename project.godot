@@ -24,7 +24,6 @@ battle="*res://battle.tscn"
 menus="*res://ui/menus.tscn"
 map="*res://map/map.tscn"
 um="*res://units/um.tscn"
-menus="*res://ui/menus.tscn"
 
 [display]
 
