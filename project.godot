@@ -10,10 +10,16 @@ config_version=5
 
 [application]
 
-config/name="Bullet Hell Jam 5"
+config/name="Kokoromi"
+config/description="Fight the evil Lich's army and become a hero with your Squad! 
+Take on the forces of evil together or split up into different Squads to overwhelm your enemies.
+ Press ESC to pause. You can find the tutorial within the pause menu. 
+The game is mainly point and click, so all you need is a mouse.
+ This is our first game jam, and boy did we learn a lot! We hope you enjoy what we have to offer."
+config/version="1.0"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://map/unit_icon.png"
 
 [autoload]
 

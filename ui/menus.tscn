@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdokj8ywtcxke"]
+[gd_scene load_steps=14 format=3 uid="uid://cdokj8ywtcxke"]
 
 [ext_resource type="Script" path="res://ui/menu_manager.gd" id="1_mkutk"]
 [ext_resource type="Theme" uid="uid://c4511mdsphtiy" path="res://ui/main_theme.tres" id="3_jr6h4"]
 [ext_resource type="Script" path="res://ui/menu_button.gd" id="3_pc8c4"]
 [ext_resource type="Script" path="res://tutorial/tutorial.gd" id="4_mjbqm"]
-[ext_resource type="Texture2D" uid="uid://bmsdub4xqnbse" path="res://tutorial/add_squads.png" id="5_uguu2"]
-[ext_resource type="Texture2D" uid="uid://dgbllwr2wk04b" path="res://tutorial/move_squad_tile.png" id="6_j16n3"]
+[ext_resource type="Texture2D" uid="uid://b76ws8lqsdkve" path="res://tutorial/select_squad.png" id="5_rbfgl"]
+[ext_resource type="Texture2D" uid="uid://3k3dyb7tst31" path="res://tutorial/add_squads.png" id="5_uguu2"]
+[ext_resource type="Texture2D" uid="uid://c5xohvvu7rso6" path="res://tutorial/move_squad_tile.png" id="6_j16n3"]
+[ext_resource type="Texture2D" uid="uid://dmljsbgnqpit8" path="res://tutorial/edit_squad.png" id="7_a71ay"]
+[ext_resource type="Texture2D" uid="uid://bsd8wppg0sybc" path="res://tutorial/move_unt_squad.png" id="9_upnbj"]
+[ext_resource type="Texture2D" uid="uid://ir24nmq1c15c" path="res://tutorial/squad_battle_movement.png" id="10_baydn"]
+[ext_resource type="Texture2D" uid="uid://br53j2ikiti5i" path="res://tutorial/attack_enemy.png" id="11_u546x"]
+[ext_resource type="Texture2D" uid="uid://dia5ue6c8twr1" path="res://tutorial/start_battle.png" id="12_larug"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfsr7"]
 bg_color = Color(0.111197, 0.111197, 0.111197, 1)
@@ -43,7 +49,7 @@ text = "Resume"
 [node name="restart" type="Button" parent="pause_menu/margin/vbox"]
 layout_mode = 2
 theme = ExtResource("3_jr6h4")
-text = "Restart"
+text = "Restart "
 
 [node name="tutorial" type="Button" parent="pause_menu/margin/vbox"]
 layout_mode = 2
@@ -106,7 +112,7 @@ offset_bottom = 72.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_mjbqm")
-tutorial_list = Array[Texture]([ExtResource("5_uguu2"), ExtResource("6_j16n3"), null, null, null, null, null, null, null])
+tutorial_list = Array[Texture]([ExtResource("5_rbfgl"), ExtResource("6_j16n3"), ExtResource("7_a71ay"), ExtResource("5_uguu2"), ExtResource("9_upnbj"), ExtResource("10_baydn"), ExtResource("11_u546x"), ExtResource("12_larug")])
 
 [node name="margin_container" type="MarginContainer" parent="tutorial_menu"]
 layout_mode = 2
